@@ -637,6 +637,53 @@
             color: var(--text-light);
         }
 
+        /* ---------- 章節橫幅 ---------- */
+        .chapter-banner {
+            background: linear-gradient(135deg, #6c3483, #8e44ad);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            color: white;
+            border-radius: 12px;
+            padding: 2.2rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            scroll-margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(108,52,131,0.35);
+        }
+
+        .chapter-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.25), transparent);
+            animation: shine 4s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -80%; }
+            60%, 100% { left: 130%; }
+        }
+
+        .chapter-banner .chapter-big {
+            font-size: 1.6rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-banner .chapter-en {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 0.3rem;
+            position: relative;
+            z-index: 1;
+        }
+
         /* ---------- 翻卡 ---------- */
         .flash-grid {
             display: grid;
@@ -1292,6 +1339,14 @@
         <li><a href="#s5">§5 決策中的角色</a></li>
         <li><a href="#s6">§6 會計師的角色</a></li>
         <li><a href="#s7">§7 會計循環</a></li>
+        <li><a href="#ch2">Ch.2 會計等式</a></li>
+        <li><a href="#c2s1">2-1 企業個體概念</a></li>
+        <li><a href="#c2s2">2-2 會計等式</a></li>
+        <li><a href="#c2s3">2-3 資產負債資本</a></li>
+        <li><a href="#c2s4">2-4 調動等式</a></li>
+        <li><a href="#c2s5">2-5 擴充等式</a></li>
+        <li><a href="#c2s6">2-6 交易影響</a></li>
+        <li><a href="#c2s7">2-7 計算題型</a></li>
         <li><a href="#flash-section">🃏 翻卡</a></li>
         <li><a href="#quiz-section">📝 測驗</a></li>
     </ul>
@@ -1694,6 +1749,298 @@
         </div>
     </section>
 
+    <!-- Chapter 2 Banner -->
+    <div id="ch2" class="chapter-banner reveal">
+        <div class="chapter-big">第二章：會計等式</div>
+        <div class="chapter-en">Chapter 2: Accounting Equation</div>
+    </div>
+
+    <!-- Ch2 Section 1 -->
+    <section id="c2s1" class="reveal">
+        <div class="section-title"><span class="num">1</span><span>企業個體概念<br>Business Entity Concept</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <div class="bilingual">
+            <div class="zh">會計等式建基於企業個體概念。根據企業個體概念，企業與企業東主是兩個獨立個體。</div>
+            <div class="en en-text">The accounting equation is based on the business entity concept. Under this concept, a business is treated as a separate entity from its owner.</div>
+        </div>
+        <div class="bilingual">
+            <div class="zh">企業的會計紀錄只應記錄與企業相關的交易，而不應記錄東主的任何私人交易。</div>
+            <div class="en en-text">Only the transactions related to the business would be recorded in the accounting records, and any personal transactions of the owner should not be entered.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>企業東主購入兩台各值四千元的電腦，一台自用，另一台供企業使用。在企業個體概念下，只有供企業使用的電腦成本（即四千元）應記錄在企業的會計紀錄中。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">A business owner bought two computers which cost $4,000 each, one for personal use and the other for business use. Under the business entity concept, only the cost of the computer for business use ($4,000) should be included in the business's accounting records.</p>
+        </div>
+
+        <div class="tip-box">
+            <div class="label">同學提提你 Student Tip</div>
+            <p>想像你在學校開了一家零食合作社。如果你自己花十元買了一包薯片自己吃，這屬於私人活動，不用記入合作社的帳簿。但如果你用合作社的資金，以五百元購買一部計算機用來算帳，這屬於企業交易，必須記入合作社的帳簿。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Imagine you start a snack cooperative at school. If you spend $10 to buy a bag of potato chips for yourself, it is a personal transaction and should not be entered into the cooperative's books. But if you use the cooperative's funds to buy a calculator for $500 to keep accounts, it is a business transaction and must be recorded in the cooperative's books.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Ch2 Section 2 -->
+    <section id="c2s2" class="reveal">
+        <div class="section-title"><span class="num">2</span><span>會計等式<br>Accounting Equation</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <div class="bilingual">
+            <div class="zh">會計等式展示了企業的資產、負債及資本的關係。它的核心概念是：企業擁有的資源，必定等於其他人士借出的資源加上企業東主投入的資源。</div>
+            <div class="en en-text">The accounting equation shows the relationship between assets, liabilities and capital of a business. Its core concept is: the resources owned by the business must equal the resources borrowed from other parties plus the resources provided by the owner.</div>
+        </div>
+
+        <div class="flow-steps" style="justify-content:center;font-size:1.1rem;">
+            <span class="flow-step">資產 Assets</span>
+            <span class="flow-arrow">＝</span>
+            <span class="flow-step">負債 Liabilities</span>
+            <span class="flow-arrow">＋</span>
+            <span class="flow-step">資本 Capital</span>
+        </div>
+
+        <div class="tip-box">
+            <div class="label">同學提提你 Student Tip</div>
+            <p>想像你計劃開設一家網上商店售賣配飾。你總共需要五千元來購買所需設備和商品作轉售（這五千元就是你的資產）。如果你投入自己的儲蓄三千元（這三千元就是你的資本），其餘的二千元則是向媽媽借入的貸款（這二千元就是你的負債）。會計等式會顯示：資產五千元 ＝ 負債二千元 ＋ 資本三千元。兩邊永遠都會是平衡的。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Imagine Peggy plans to start an online store selling accessories. You need a total of $5,000 to buy required equipment and goods for resale (this $5,000 is your assets). If you contribute your own savings of $3,000 (this $3,000 is your capital), the remaining $2,000 is a loan borrowed from your mother (this $2,000 is your liabilities). The equation shows: Assets $5,000 = Liabilities $2,000 + Capital $3,000. Both sides will always be in balance.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Ch2 Section 3 -->
+    <section id="c2s3" class="reveal">
+        <div class="section-title"><span class="num">3</span><span>資產、負債及資本的項目<br>Items of Assets, Liabilities and Capital</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <h3>(a) 資產 Assets</h3>
+        <p>資產是指企業擁有、並能幫助企業在將來賺取收益的資源。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Assets refer to resources owned by a business which can be used to generate future revenues.</p>
+        <div class="keywords">
+            <span>土地和樓房 land and buildings</span>
+            <span>辦公室設備 office equipment</span>
+            <span>汽車 motor vehicles</span>
+            <span>機器 machinery</span>
+            <span>應收貨款 trade receivables</span>
+            <span>銀行存款 bank deposit</span>
+            <span>現金 cash</span>
+        </div>
+
+        <h3>(b) 負債 Liabilities</h3>
+        <p>負債是指向企業東主以外的其他人士或企業借取的資源，是企業在未來需要償還的債務。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Liabilities refer to resources borrowed from parties other than the owner, representing future obligations to be repaid.</p>
+        <div class="keywords">
+            <span>應付貨款 trade payables</span>
+            <span>銀行貸款 bank loan</span>
+            <span>銀行透支 bank overdraft</span>
+        </div>
+
+        <h3>(c) 資本 Capital</h3>
+        <p>資本是指由企業東主投入企業的資源，又稱為東主權益。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Capital refers to resources contributed by the owner to the business, also known as owner's equity.</p>
+
+        <div class="exam-alert">
+            <div class="label">考場防錯警示 Exam Trap Alert</div>
+            <p>「應收貨款」代表顧客欠你的錢，在未來可以收回，因此是企業的「資產」。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">"Trade receivables" represents money owed by customers to be collected in the future, thus it is an "asset".</p>
+            <p>「應付貨款」代表企業欠供應商的錢，在未來必須償還，因此是企業的「負債」。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">"Trade payables" represents money owed by the business to suppliers to be paid in the future, thus it is a "liability".</p>
+            <p>銀行存款一般是資產，但如果企業從銀行提取的金額超過存款金額，餘額會變為負數，這稱為「銀行透支」，屬於企業對銀行的負債。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Bank deposits are usually assets, but if withdrawals exceed the deposit amount, the balance becomes negative, which is a "bank overdraft", treated as a liability.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Ch2 Section 4 -->
+    <section id="c2s4" class="reveal">
+        <div class="section-title"><span class="num">4</span><span>調動會計等式<br>Rearranging the Accounting Equation</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>我們可以通過調動會計等式，來計算其中一個未知的數值。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">We can rearrangement the accounting equation to calculate any unknown figure.</p>
+
+        <div class="flow-steps" style="justify-content:center;">
+            <span class="flow-step">資產 ＝ 負債 ＋ 資本</span>
+        </div>
+        <div class="flow-steps" style="justify-content:center;">
+            <span class="flow-step">資本 ＝ 資產 － 負債</span>
+        </div>
+        <div class="flow-steps" style="justify-content:center;">
+            <span class="flow-step">負債 ＝ 資產 － 資本</span>
+        </div>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Assets = Liabilities + Capital<br>Capital = Assets − Liabilities<br>Liabilities = Assets − Capital</p>
+        </div>
+    </section>
+
+    <!-- Ch2 Section 5 -->
+    <section id="c2s5" class="reveal">
+        <div class="section-title"><span class="num">5</span><span>擴充會計等式：收益、費用與提用<br>Expanded Accounting Equation: Revenues, Expenses and Drawings</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <h3>(a) 收益 Revenues</h3>
+        <p>收益是指企業從售賣貨品和服務所得的收入，會增加企業的資本。例如：銷貨收益、服務收益、利息收益、服務佣金。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Revenues refer to income received from selling goods or providing services, which will increase capital. Examples: sales revenue, service income, interest income, service commission.</p>
+
+        <h3>(b) 費用 Expenses</h3>
+        <p>費用是指企業在賺取收益的過程中所耗用的成本，會減少企業的資本。例如：租金和差餉、工資與薪金、水電費、保養費、保險費。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Expenses refer to costs incurred in the process of generating revenues, which will decrease capital. Examples: rent and rates, wages and salaries, electricity and water, maintenance fee, insurance.</p>
+
+        <h3>(c) 提用 Drawings</h3>
+        <p>提用是指東主從企業提取現金、貨品或其他資產作個人自用，會減少企業營運的資本。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Drawings refer to cash, goods or other assets taken away by the owner from the business for personal use, which will decrease capital.</p>
+
+        <h3>(d) 擴充會計等式的公式 Formula of the Expanded Accounting Equation</h3>
+        <div class="flow-steps" style="justify-content:center;">
+            <span class="flow-step">資產 ＝ 負債 ＋［資本 ＋（收益 － 費用）－ 提用］</span>
+        </div>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Assets = Liabilities + [Capital + (Revenues − Expenses) − Drawings]</p>
+
+        <div class="exam-alert">
+            <div class="label">考場防錯警示 Exam Trap Alert</div>
+            <p>收益與費用的差額就是企業的利潤或虧損。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">The difference between revenues and expenses is the profit or loss.</p>
+            <p>當收益大於費用，企業錄得利潤，這會增加企業的期末資本。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">When revenues &gt; expenses, the business earns a profit, which increases the closing capital.</p>
+            <p>當費用大於收益，企業錄得虧損，這會減少企業的期末資本。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">When revenues &lt; expenses, the business incurs a loss, which decreases the closing capital.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Ch2 Section 6 -->
+    <section id="c2s6" class="reveal">
+        <div class="section-title"><span class="num">6</span><span>商業交易對會計等式的影響<br>Effects of Business Transactions on the Accounting Equation</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>每一項商業交易最少會影響會計等式中的兩個項目，且在交易後，等式兩邊必定能保持平衡。以下是常見交易對等式的具體影響：</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Every business transaction affects at least two items in the accounting equation, and both sides must remain in balance. Below are the effects of common transactions on the equation:</p>
+
+        <div class="cycle-grid">
+            <div class="cycle-card">
+                <div class="step-num">一</div>
+                <h4>東主投入資產 Contribution by Owner</h4>
+                <p>東主湯姆向企業投放現金十萬元。影響：資產中的現金增加十萬元，同時資本增加十萬元。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">Owner Tom invested $100,000 cash in the business. Effect: Cash under assets +$100,000, capital +$100,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$100,000) ＝ 負債 ($0) ＋ 資本 (+$100,000)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">二</div>
+                <h4>以現金購買資產 Acquiring Assets in Cash</h4>
+                <p>企業以現金二萬元購買汽車。影響：汽車增加二萬元，現金減少二萬元。資產總值維持不變。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company purchased a motor van for $20,000 in cash. Effect: Motor vehicles +$20,000, cash −$20,000. Total assets unchanged.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$20,000, −$20,000) ＝ 負債 ($0) ＋ 資本 ($0)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">三</div>
+                <h4>取得銀行貸款 Obtaining Bank Loan</h4>
+                <p>企業向銀行借貸二萬八千元，資金直接存入銀行存款帳戶。影響：銀行存款增加二萬八千元，銀行貸款增加二萬八千元。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company borrowed $28,000 from the bank. Effect: Bank deposit +$28,000, bank loans +$28,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$28,000) ＝ 負債 (+$28,000) ＋ 資本 ($0)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">四</div>
+                <h4>以支票付款購入資產 Acquiring Assets by Cheque</h4>
+                <p>企業向彼臣購買傢具，並以支票支付一萬元。影響：傢具增加一萬元，銀行存款減少一萬元。資產總值不變。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company purchased furniture from Benson and paid $10,000 by cheque. Effect: Furniture +$10,000, bank deposit −$10,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$10,000, −$10,000) ＝ 負債 ($0) ＋ 資本 ($0)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">五</div>
+                <h4>賒銷資產 Selling Assets on Credit</h4>
+                <p>企業向文仁賒銷傢具一萬元。影響：應收貨款增加一萬元，傢具減少一萬元。資產總值不變。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company sold furniture to Man Yan on credit for $10,000. Effect: Trade receivables +$10,000, furniture −$10,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$10,000, −$10,000) ＝ 負債 ($0) ＋ 資本 ($0)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">六</div>
+                <h4>債務人償還欠款 Debtors Settling Debt</h4>
+                <p>企業從文仁收到現金還款一萬元。影響：現金增加一萬元，應收貨款減少一萬元。資產總值不變。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company received $10,000 cash from Man Yan as repayment. Effect: Cash +$10,000, trade receivables −$10,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$10,000, −$10,000) ＝ 負債 ($0) ＋ 資本 ($0)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">七</div>
+                <h4>賒購資產 Acquiring Assets on Credit</h4>
+                <p>企業從快車公司賒購汽車一萬五千元。影響：汽車增加一萬五千元，應付貨款增加一萬五千元。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company purchased a motor van on credit from Fast Car Company for $15,000. Effect: Motor vehicles +$15,000, trade payables +$15,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$15,000) ＝ 負債 (+$15,000) ＋ 資本 ($0)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">八</div>
+                <h4>償還債權人款項 Repaying Creditors</h4>
+                <p>企業以支票向快車公司清還一萬五千元欠款。影響：銀行存款減少一萬五千元，應付貨款減少一萬五千元。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company settled the debt of $15,000 owed to Fast Car Company by cheque. Effect: Bank deposit −$15,000, trade payables −$15,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (−$15,000) ＝ 負債 (−$15,000) ＋ 資本 ($0)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">九</div>
+                <h4>賺取收益 Earning Revenues</h4>
+                <p>企業向美兒提供服務，並收取支票二萬元。影響：銀行存款增加二萬元，資本中的收益增加二萬元。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company provided services to Amy and received a cheque for $20,000. Effect: Bank deposit +$20,000, revenues under capital +$20,000.</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (+$20,000) ＝ 負債 ($0) ＋ 資本 (+$20,000)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">十</div>
+                <h4>支付費用 Paying Expenses</h4>
+                <p>企業以支票支付本月的員工工資一萬五千元。影響：銀行存款減少一萬五千元，資本中的費用增加一萬五千元（即資本減少）。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">The company paid salaries of $15,000 by cheque. Effect: Bank deposit −$15,000, expenses under capital +$15,000 (capital decreased).</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (−$15,000) ＝ 負債 ($0) ＋ 資本 (−$15,000)</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">十一</div>
+                <h4>東主提取現金自用 Owner's Drawings</h4>
+                <p>東主湯姆從銀行存款帳戶提取一萬元支付私人費用。影響：銀行存款減少一萬元，資本中的提用增加一萬元（即資本減少）。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">Owner Tom withdrew $10,000 from the bank account for personal expenses. Effect: Bank deposit −$10,000, drawings under capital +$10,000 (capital decreased).</p>
+                <p style="font-weight:700;color:var(--primary);">資產 (−$10,000) ＝ 負債 ($0) ＋ 資本 (−$10,000)</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Ch2 Section 7 -->
+    <section id="c2s7" class="reveal">
+        <div class="section-title"><span class="num">7</span><span>課本關鍵計算題型分析<br>Key Textbook Computational Question Analysis</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>以下是文憑試常見的一類典型計算題型：</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">The following is a typical computational question commonly tested in examinations:</p>
+
+        <div class="example-box">
+            <div class="label">題目 Question</div>
+            <p>黃小姐於一月一日投資辦公室設備七萬元創立企業。同日，她取得一筆四萬元的銀行貸款。在該年年終，企業的總資產和總負債分別為十五萬四千元和七萬六千元。在該年度內，黃小姐每月定期從企業的銀行存款帳戶提取現金八百元自用。試計算該年度企業的淨利或淨損失。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Ms. Wong started her business on 1 January by introducing office equipment of $70,000. On the same day, she obtained a bank loan of $40,000. At the end of the year, total assets and total liabilities were $154,000 and $76,000 respectively. During the year, Ms. Wong made cash drawings of $800 per month regularly. Calculate the net profit or net loss for the year.</p>
+        </div>
+
+        <div class="cycle-grid">
+            <div class="cycle-card">
+                <div class="step-num">一</div>
+                <h4>計算期末資本 Calculate Closing Capital</h4>
+                <p>期末資產 － 期末負債 ＝ 期末資本<br>十五萬四千元 － 七萬六千元 ＝ 七萬八千元</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">Closing Assets − Closing Liabilities = Closing Capital<br>$154,000 − $76,000 = $78,000</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">二</div>
+                <h4>計算全年提用 Calculate Total Drawings</h4>
+                <p>每月八百元 × 十二個月 ＝ 九千六百元</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">$800 per month × 12 months = $9,600</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">三</div>
+                <h4>運用擴充等式求淨利 Apply Expanded Equation</h4>
+                <p>期初資本 ＋ 淨利 － 提用 ＝ 期末資本<br>七萬元 ＋ 淨利 － 九千六百元 ＝ 七萬八千元<br>淨利 ＝ 七萬八千元 － 七萬元 ＋ 九千六百元 ＝ 一萬七千六百元</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">Opening Capital + Net Profit − Drawings = Closing Capital<br>$70,000 + Net Profit − $9,600 = $78,000<br>Net Profit = $17,600</p>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <div class="label">答案 Answer</div>
+            <p>本年度企業錄得的淨利為一萬七千六百元。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">The business earned a net profit of $17,600 for the year.</p>
+        </div>
+        </div>
+    </section>
+
     <!-- Flashcards -->
     <section id="flash-section" class="reveal">
         <div class="section-title"><span class="num">🃏</span><span>重點翻卡 Flashcards<br><span style="font-size:0.85rem;font-weight:400;">點擊卡片翻面自測</span></span><span class="collapse-icon">▼</span></div>
@@ -1723,6 +2070,22 @@
             <div class="flashcard"><div class="flashcard-inner">
                 <div class="flash-face flash-front"><div>試算表平衡 = 完全正確？</div><div class="flash-en en-text">Trial balance agrees = 100% correct?</div></div>
                 <div class="flash-face flash-back"><div>錯！只能檢查算術準確度，查不出原則性錯誤或完全遺漏。期末調整要在編報表前完成。</div><div class="flash-en en-text">No! It only checks arithmetical accuracy; cannot detect errors of principle or complete omissions. Adjustments come before statements.</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>會計等式？</div><div class="flash-en en-text">Accounting equation?</div></div>
+                <div class="flash-face flash-back"><div>資產 ＝ 負債 ＋ 資本，兩邊永遠平衡</div><div class="flash-en en-text">Assets = Liabilities + Capital; both sides always balance</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>應收貨款 vs 應付貨款？</div><div class="flash-en en-text">Receivables vs Payables?</div></div>
+                <div class="flash-face flash-back"><div>應收 = 顧客欠你錢 = 資產；應付 = 你欠供應商錢 = 負債</div><div class="flash-en en-text">Receivables = customers owe you = asset; Payables = you owe suppliers = liability</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>擴充會計等式？</div><div class="flash-en en-text">Expanded equation?</div></div>
+                <div class="flash-face flash-back"><div>資產 ＝ 負債 ＋［資本 ＋（收益 － 費用）－ 提用］</div><div class="flash-en en-text">Assets = Liabilities + [Capital + (Revenues − Expenses) − Drawings]</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>提用的影響？</div><div class="flash-en en-text">Effect of drawings?</div></div>
+                <div class="flash-face flash-back"><div>東主提取資產自用，資產減少、資本減少</div><div class="flash-en en-text">Owner takes assets for personal use; assets and capital decrease</div></div>
             </div></div>
         </div>
         </div>
@@ -1951,6 +2314,42 @@
             ans: 1,
             why: '管理會計是「作戰秘笈」：只給內部、前瞻性、格式自由、無固定時距。',
             whyEn: 'Management accounting is the "battle guide": internal only, forward-looking, flexible format, no fixed interval.'
+        },
+        {
+            q: 'Q7. 會計等式是？',
+            qEn: 'Q7. What is the accounting equation?',
+            opts: ['資產 ＝ 負債 ＋ 資本', '資產 ＝ 負債 － 資本', '資本 ＝ 負債 ＋ 資產', '負債 ＝ 資本 － 資產'],
+            optsEn: ['Assets = Liabilities + Capital', 'Assets = Liabilities − Capital', 'Capital = Liabilities + Assets', 'Liabilities = Capital − Assets'],
+            ans: 0,
+            why: '企業擁有的資源必定等於借入資源加東主投入資源，兩邊永遠平衡。',
+            whyEn: 'Resources owned must equal borrowed resources plus owner-contributed resources; both sides always balance.'
+        },
+        {
+            q: 'Q8. 「應付貨款」屬於哪一類項目？',
+            qEn: 'Q8. "Trade payables" belongs to which category?',
+            opts: ['資產', '負債', '資本', '收益'],
+            optsEn: ['Assets', 'Liabilities', 'Capital', 'Revenues'],
+            ans: 1,
+            why: '應付貨款是欠供應商、未來須償還的錢，所以是負債；應收貨款才是資產。',
+            whyEn: 'Trade payables is money owed to suppliers to be repaid in the future, so it is a liability; trade receivables is the asset.'
+        },
+        {
+            q: 'Q9. 東主從企業提取現金自用，對等式的影響是？',
+            qEn: 'Q9. What is the effect of the owner withdrawing cash for personal use?',
+            opts: ['資產增加、資本增加', '資產減少、資本減少', '負債增加、資產增加', '只影響負債內部項目'],
+            optsEn: ['Assets increase, capital increases', 'Assets decrease, capital decreases', 'Liabilities increase, assets increase', 'Only items within liabilities change'],
+            ans: 1,
+            why: '提用令銀行存款（資產）減少，同時提用增加即資本減少。',
+            whyEn: 'Drawings decrease bank deposit (assets) and increase drawings, meaning capital decreases.'
+        },
+        {
+            q: 'Q10. 某年收益 $50,000、費用 $30,000，該年錄得？',
+            qEn: 'Q10. Revenues $50,000 and expenses $30,000 for the year. The result is?',
+            opts: ['$20,000 利潤', '$80,000 利潤', '$20,000 虧損', '$30,000 利潤'],
+            optsEn: ['$20,000 profit', '$80,000 profit', '$20,000 loss', '$30,000 profit'],
+            ans: 0,
+            why: '收益減費用 = $50,000 − $30,000 = $20,000，收益較大所以是利潤，會增加期末資本。',
+            whyEn: 'Revenues minus expenses = $50,000 − $30,000 = $20,000. Revenues are greater, so it is a profit that increases closing capital.'
         }
     ];
 
@@ -2007,7 +2406,7 @@
             if (correct === questions.length) {
                 quizScore.textContent += ' — 滿分！太厲害了！';
                 confetti();
-            } else if (correct >= 4) {
+            } else if (correct >= 7) {
                 quizScore.textContent += ' — 不錯！再翻翻上面的翻卡吧！';
             } else {
                 quizScore.textContent += ' — 加油！重溫筆記後再挑戰一次！';
