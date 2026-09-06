@@ -195,58 +195,6 @@
             50% { transform: translateY(8px); }
         }
 
-        /* ---------- Nav ---------- */
-        nav {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: background 0.3s, transform 0.35s ease;
-        }
-
-        nav.nav-hidden {
-            transform: translateY(-110%);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        nav a {
-            display: block;
-            padding: 0.4rem 1rem;
-            color: var(--primary);
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        nav a:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        nav a.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(26,82,118,0.4);
-        }
-
         main {
             max-width: 900px;
             margin: 2rem auto;
@@ -1083,7 +1031,6 @@
         }
 
         @media (min-width: 1100px) {
-            nav { padding-left: 246px; }
             main { max-width: none; margin-left: 230px; }
             main > section, main > .chapter-banner { max-width: 900px; margin-left: auto; margin-right: auto; }
         }
@@ -1412,7 +1359,6 @@
         @media (max-width: 768px) {
             header h1 { font-size: 1.5rem; }
             header h2 { font-size: 0.95rem; }
-            nav a { font-size: 0.78rem; padding: 0.3rem 0.7rem; }
             section { padding: 1.5rem 1.2rem; }
             .bilingual { grid-template-columns: 1fr; }
             .flow-steps { justify-content: center; }
@@ -1422,7 +1368,7 @@
         }
 
         @media print {
-            nav, #toolbar, #back-top, #progress, #quiz-section, #flash-section, #sidebar, #side-toggle { display: none; }
+            #toolbar, #back-top, #progress, #quiz-section, #flash-section, #sidebar, #side-toggle { display: none; }
             section { break-inside: avoid; box-shadow: none; }
             .reveal { opacity: 1; transform: none; }
         }
@@ -1443,28 +1389,6 @@
     <h2>Chapter 1: Overview of Accounting</h2>
     <div class="scroll-hint">▼ 向下滑動開始複習 ▼</div>
 </header>
-
-<nav>
-    <ul>
-        <li><a href="#s1">§1 企業個體、簿記與會計</a></li>
-        <li><a href="#s2">§2 四種主要功能</a></li>
-        <li><a href="#s3">§3 財務報表</a></li>
-        <li><a href="#s4">§4 財務 vs 管理會計</a></li>
-        <li><a href="#s5">§5 決策中的角色</a></li>
-        <li><a href="#s6">§6 會計師的角色</a></li>
-        <li><a href="#s7">§7 會計循環</a></li>
-        <li><a href="#ch2">Ch.2 會計等式</a></li>
-        <li><a href="#c2s1">2-1 企業個體概念</a></li>
-        <li><a href="#c2s2">2-2 會計等式</a></li>
-        <li><a href="#c2s3">2-3 資產負債資本</a></li>
-        <li><a href="#c2s4">2-4 調動等式</a></li>
-        <li><a href="#c2s5">2-5 擴充等式</a></li>
-        <li><a href="#c2s6">2-6 交易影響</a></li>
-        <li><a href="#c2s7">2-7 計算題型</a></li>
-        <li><a href="#flash-section">🃏 翻卡</a></li>
-        <li><a href="#quiz-section">📝 測驗</a></li>
-    </ul>
-</nav>
 
 <aside id="sidebar">
     <div class="side-title">章節導航</div>
@@ -2297,17 +2221,12 @@
     /* ---------- 閱讀進度條 + 回頂部 ---------- */
     var bar = document.getElementById('progress');
     var backTop = document.getElementById('back-top');
-    var navBar = document.querySelector('nav');
-    var lastY = 0;
     function onScroll() {
         var h = document.documentElement;
         var max = h.scrollHeight - h.clientHeight;
         bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
         if (h.scrollTop > 400) backTop.classList.add('show');
         else backTop.classList.remove('show');
-        if (h.scrollTop > 200 && h.scrollTop > lastY) navBar.classList.add('nav-hidden');
-        else navBar.classList.remove('nav-hidden');
-        lastY = h.scrollTop;
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -2336,7 +2255,7 @@
     }, 100);
 
     /* ---------- 導航 scrollspy ---------- */
-    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a, #sidebar a'));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('#sidebar a'));
 
     /* ---------- 左側導航欄開關 ---------- */
     document.getElementById('side-toggle').addEventListener('click', function () {
