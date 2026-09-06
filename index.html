@@ -980,6 +980,120 @@
             white-space: nowrap;
         }
 
+        /* ---------- 左側導航欄 ---------- */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 230px;
+            background: var(--card-bg);
+            border-right: 1px solid var(--border);
+            padding: 1rem 0.7rem 2rem;
+            overflow-y: auto;
+            z-index: 600;
+            transition: transform 0.3s ease, background 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .side-title {
+            font-weight: 700;
+            color: var(--primary);
+            padding: 0.3rem 0.6rem 0.6rem;
+            font-size: 0.95rem;
+            border-bottom: 2px solid var(--primary-light);
+            margin-bottom: 0.5rem;
+        }
+
+        #sidebar details {
+            margin-bottom: 0.3rem;
+        }
+
+        #sidebar summary {
+            cursor: pointer;
+            font-weight: 700;
+            padding: 0.45rem 0.6rem;
+            border-radius: 8px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        #sidebar summary::-webkit-details-marker {
+            display: none;
+        }
+
+        #sidebar summary::before {
+            content: '▸';
+            color: var(--primary-light);
+            transition: transform 0.2s;
+            font-size: 0.8rem;
+        }
+
+        #sidebar details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        #sidebar summary:hover {
+            background: var(--code-bg);
+        }
+
+        #sidebar details a {
+            display: block;
+            padding: 0.32rem 0.6rem 0.32rem 1.6rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.15s;
+        }
+
+        #sidebar details a:hover {
+            background: var(--code-bg);
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        #sidebar details a.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        #side-toggle {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 500;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            display: none;
+            transition: transform 0.2s;
+        }
+
+        #side-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 1100px) {
+            nav { padding-left: 246px; }
+            main { max-width: none; margin-left: 230px; }
+            main > section, main > .chapter-banner { max-width: 900px; margin-left: auto; margin-right: auto; }
+        }
+
+        @media (max-width: 1099px) {
+            #sidebar { transform: translateX(-110%); box-shadow: 4px 0 24px rgba(0,0,0,0.2); }
+            body.side-open #sidebar { transform: none; }
+            #side-toggle { display: block; }
+        }
+
         /* ---------- 回頂部 ---------- */
         #back-top {
             position: fixed;
@@ -1308,7 +1422,7 @@
         }
 
         @media print {
-            nav, #toolbar, #back-top, #progress, #quiz-section, #flash-section { display: none; }
+            nav, #toolbar, #back-top, #progress, #quiz-section, #flash-section, #sidebar, #side-toggle { display: none; }
             section { break-inside: avoid; box-shadow: none; }
             .reveal { opacity: 1; transform: none; }
         }
@@ -1351,6 +1465,36 @@
         <li><a href="#quiz-section">📝 測驗</a></li>
     </ul>
 </nav>
+
+<aside id="sidebar">
+    <div class="side-title">章節導航</div>
+    <details open>
+        <summary>第一章：會計概述</summary>
+        <a href="#s1">§1 企業個體・簿記・會計</a>
+        <a href="#s2">§2 四種主要功能</a>
+        <a href="#s3">§3 財務報表</a>
+        <a href="#s4">§4 財務 vs 管理會計</a>
+        <a href="#s5">§5 決策中的角色</a>
+        <a href="#s6">§6 會計師的角色</a>
+        <a href="#s7">§7 會計循環</a>
+    </details>
+    <details open>
+        <summary>第二章：會計等式</summary>
+        <a href="#ch2">Ch.2 會計等式</a>
+        <a href="#c2s1">2-1 企業個體概念</a>
+        <a href="#c2s2">2-2 會計等式</a>
+        <a href="#c2s3">2-3 資產負債資本</a>
+        <a href="#c2s4">2-4 調動等式</a>
+        <a href="#c2s5">2-5 擴充等式</a>
+        <a href="#c2s6">2-6 交易影響</a>
+        <a href="#c2s7">2-7 計算題型</a>
+    </details>
+    <details open>
+        <summary>溫習工具</summary>
+        <a href="#flash-section">🃏 重點翻卡</a>
+        <a href="#quiz-section">📝 自我測驗</a>
+    </details>
+</aside>
 
 <main>
 
@@ -2115,6 +2259,7 @@
     <button id="hl-remove">✕ 移除螢光</button>
 </div>
 
+<button id="side-toggle" title="章節導航">☰</button>
 <button id="back-top" title="回到頂部">↑</button>
 
 <footer>
@@ -2191,7 +2336,17 @@
     }, 100);
 
     /* ---------- 導航 scrollspy ---------- */
-    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a, #sidebar a'));
+
+    /* ---------- 左側導航欄開關 ---------- */
+    document.getElementById('side-toggle').addEventListener('click', function () {
+        document.body.classList.toggle('side-open');
+    });
+    document.querySelectorAll('#sidebar a').forEach(function (a) {
+        a.addEventListener('click', function () {
+            document.body.classList.remove('side-open');
+        });
+    });
     var spyObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
             if (e.isIntersecting) {
