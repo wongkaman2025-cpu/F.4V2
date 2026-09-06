@@ -1022,7 +1022,7 @@
             cursor: pointer;
             z-index: 500;
             box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-            display: none;
+            display: block;
             transition: transform 0.2s;
         }
 
@@ -1030,15 +1030,28 @@
             transform: scale(1.1);
         }
 
-        @media (min-width: 1100px) {
-            main { max-width: none; margin-left: 230px; }
-            main > section, main > .chapter-banner { max-width: 900px; margin-left: auto; margin-right: auto; }
+        #sidebar {
+            transform: translateX(-110%);
+            box-shadow: 4px 0 24px rgba(0,0,0,0.2);
         }
 
-        @media (max-width: 1099px) {
-            #sidebar { transform: translateX(-110%); box-shadow: 4px 0 24px rgba(0,0,0,0.2); }
-            body.side-open #sidebar { transform: none; }
-            #side-toggle { display: block; }
+        body.side-open #sidebar {
+            transform: none;
+        }
+
+        #side-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 550;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        body.side-open #side-backdrop {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* ---------- 回頂部 ---------- */
@@ -1305,6 +1318,7 @@
         if (e.key === 'Escape') {
             hlHideToolbar();
             hlHidePopup();
+            document.body.classList.remove('side-open');
             return;
         }
         if (!e.altKey || e.ctrlKey || e.metaKey) return;
@@ -1368,7 +1382,7 @@
         }
 
         @media print {
-            #toolbar, #back-top, #progress, #quiz-section, #flash-section, #quiz-ch2, #flash-ch2, #sidebar, #side-toggle { display: none; }
+            #toolbar, #back-top, #progress, #quiz-section, #flash-section, #quiz-ch2, #flash-ch2, #sidebar, #side-toggle, #side-backdrop { display: none; }
             section { break-inside: avoid; box-shadow: none; }
             .reveal { opacity: 1; transform: none; }
         }
@@ -1390,6 +1404,7 @@
     <div class="scroll-hint">▼ 向下滑動開始複習 ▼</div>
 </header>
 
+<div id="side-backdrop"></div>
 <aside id="sidebar">
     <div class="side-title">章節導航</div>
     <details open>
@@ -2287,6 +2302,9 @@
         a.addEventListener('click', function () {
             document.body.classList.remove('side-open');
         });
+    });
+    document.getElementById('side-backdrop').addEventListener('click', function () {
+        document.body.classList.remove('side-open');
     });
     var spyObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
