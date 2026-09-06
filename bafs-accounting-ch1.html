@@ -816,7 +816,7 @@
             margin: 1.2rem 0;
         }
 
-        #quiz-reset {
+        #quiz-reset, #quiz-reset-ch2 {
             display: block;
             margin: 0 auto;
             background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
@@ -829,7 +829,7 @@
             transition: transform 0.2s;
         }
 
-        #quiz-reset:hover {
+        #quiz-reset:hover, #quiz-reset-ch2:hover {
             transform: scale(1.08);
         }
 
@@ -1368,7 +1368,7 @@
         }
 
         @media print {
-            #toolbar, #back-top, #progress, #quiz-section, #flash-section, #sidebar, #side-toggle { display: none; }
+            #toolbar, #back-top, #progress, #quiz-section, #flash-section, #quiz-ch2, #flash-ch2, #sidebar, #side-toggle { display: none; }
             section { break-inside: avoid; box-shadow: none; }
             .reveal { opacity: 1; transform: none; }
         }
@@ -1412,11 +1412,13 @@
         <a href="#c2s5">2-5 擴充等式</a>
         <a href="#c2s6">2-6 交易影響</a>
         <a href="#c2s7">2-7 計算題型</a>
+        <a href="#flash-ch2">2-🃏 重點翻卡</a>
+        <a href="#quiz-ch2">2-📝 自我測驗</a>
     </details>
     <details open>
         <summary>溫習工具</summary>
-        <a href="#flash-section">🃏 重點翻卡</a>
-        <a href="#quiz-section">📝 自我測驗</a>
+        <a href="#flash-section">🃏 Ch.1 重點翻卡</a>
+        <a href="#quiz-section">📝 Ch.1 自我測驗</a>
     </details>
 </aside>
 
@@ -2109,9 +2111,45 @@
         </div>
     </section>
 
+    <!-- Ch2 Flashcards -->
+    <section id="flash-ch2" class="reveal">
+        <div class="section-title"><span class="num">🃏</span><span>第二章重點翻卡 Ch.2 Flashcards<br><span style="font-size:0.85rem;font-weight:400;">點擊卡片翻面自測</span></span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+        <p class="flash-hint">👆 點擊每張卡片翻面查看答案，再點一次翻回來</p>
+        <div class="flash-grid">
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>會計等式？</div><div class="flash-en en-text">Accounting equation?</div></div>
+                <div class="flash-face flash-back"><div>資產 ＝ 負債 ＋ 資本，兩邊永遠平衡</div><div class="flash-en en-text">Assets = Liabilities + Capital; both sides always balance</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>應收貨款 vs 應付貨款？</div><div class="flash-en en-text">Receivables vs Payables?</div></div>
+                <div class="flash-face flash-back"><div>應收 = 顧客欠你錢 = 資產；應付 = 你欠供應商錢 = 負債</div><div class="flash-en en-text">Receivables = customers owe you = asset; Payables = you owe suppliers = liability</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>擴充會計等式？</div><div class="flash-en en-text">Expanded equation?</div></div>
+                <div class="flash-face flash-back"><div>資產 ＝ 負債 ＋［資本 ＋（收益 － 費用）－ 提用］</div><div class="flash-en en-text">Assets = Liabilities + [Capital + (Revenues − Expenses) − Drawings]</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>提用的影響？</div><div class="flash-en en-text">Effect of drawings?</div></div>
+                <div class="flash-face flash-back"><div>東主提取資產自用，資產減少、資本減少</div><div class="flash-en en-text">Owner takes assets for personal use; assets and capital decrease</div></div>
+            </div></div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Ch2 Quiz -->
+    <section id="quiz-ch2" class="reveal">
+        <div class="section-title"><span class="num">📝</span><span>第二章自我測驗 Ch.2 Quiz<br><span style="font-size:0.85rem;font-weight:400;">即時對答案，滿分有驚喜</span></span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+        <div id="quiz-box-ch2"></div>
+        <div id="quiz-score-ch2"></div>
+        <button id="quiz-reset-ch2">🔄 重新測驗</button>
+        </div>
+    </section>
+
     <!-- Flashcards -->
     <section id="flash-section" class="reveal">
-        <div class="section-title"><span class="num">🃏</span><span>重點翻卡 Flashcards<br><span style="font-size:0.85rem;font-weight:400;">點擊卡片翻面自測</span></span><span class="collapse-icon">▼</span></div>
+        <div class="section-title"><span class="num">🃏</span><span>第一章重點翻卡 Ch.1 Flashcards<br><span style="font-size:0.85rem;font-weight:400;">點擊卡片翻面自測</span></span><span class="collapse-icon">▼</span></div>
         <div class="section-body">
         <p class="flash-hint">👆 點擊每張卡片翻面查看答案，再點一次翻回來</p>
         <div class="flash-grid">
@@ -2139,29 +2177,13 @@
                 <div class="flash-face flash-front"><div>試算表平衡 = 完全正確？</div><div class="flash-en en-text">Trial balance agrees = 100% correct?</div></div>
                 <div class="flash-face flash-back"><div>錯！只能檢查算術準確度，查不出原則性錯誤或完全遺漏。期末調整要在編報表前完成。</div><div class="flash-en en-text">No! It only checks arithmetical accuracy; cannot detect errors of principle or complete omissions. Adjustments come before statements.</div></div>
             </div></div>
-            <div class="flashcard"><div class="flashcard-inner">
-                <div class="flash-face flash-front"><div>會計等式？</div><div class="flash-en en-text">Accounting equation?</div></div>
-                <div class="flash-face flash-back"><div>資產 ＝ 負債 ＋ 資本，兩邊永遠平衡</div><div class="flash-en en-text">Assets = Liabilities + Capital; both sides always balance</div></div>
-            </div></div>
-            <div class="flashcard"><div class="flashcard-inner">
-                <div class="flash-face flash-front"><div>應收貨款 vs 應付貨款？</div><div class="flash-en en-text">Receivables vs Payables?</div></div>
-                <div class="flash-face flash-back"><div>應收 = 顧客欠你錢 = 資產；應付 = 你欠供應商錢 = 負債</div><div class="flash-en en-text">Receivables = customers owe you = asset; Payables = you owe suppliers = liability</div></div>
-            </div></div>
-            <div class="flashcard"><div class="flashcard-inner">
-                <div class="flash-face flash-front"><div>擴充會計等式？</div><div class="flash-en en-text">Expanded equation?</div></div>
-                <div class="flash-face flash-back"><div>資產 ＝ 負債 ＋［資本 ＋（收益 － 費用）－ 提用］</div><div class="flash-en en-text">Assets = Liabilities + [Capital + (Revenues − Expenses) − Drawings]</div></div>
-            </div></div>
-            <div class="flashcard"><div class="flashcard-inner">
-                <div class="flash-face flash-front"><div>提用的影響？</div><div class="flash-en en-text">Effect of drawings?</div></div>
-                <div class="flash-face flash-back"><div>東主提取資產自用，資產減少、資本減少</div><div class="flash-en en-text">Owner takes assets for personal use; assets and capital decrease</div></div>
-            </div></div>
         </div>
         </div>
     </section>
 
     <!-- Quiz -->
     <section id="quiz-section" class="reveal">
-        <div class="section-title"><span class="num">📝</span><span>自我測驗 Quiz<br><span style="font-size:0.85rem;font-weight:400;">即時對答案，滿分有驚喜</span></span><span class="collapse-icon">▼</span></div>
+        <div class="section-title"><span class="num">📝</span><span>第一章自我測驗 Ch.1 Quiz<br><span style="font-size:0.85rem;font-weight:400;">即時對答案，滿分有驚喜</span></span><span class="collapse-icon">▼</span></div>
         <div class="section-body">
         <div id="quiz-box"></div>
         <div id="quiz-score"></div>
@@ -2334,7 +2356,7 @@
     });
 
     /* ---------- 測驗 ---------- */
-    var questions = [
+    var questionsCh1 = [
         {
             q: 'Q1. 會計四種功能的正確順序是？',
             qEn: 'Q1. What is the correct order of the four accounting functions?',
@@ -2388,7 +2410,9 @@
             ans: 1,
             why: '管理會計是「作戰秘笈」：只給內部、前瞻性、格式自由、無固定時距。',
             whyEn: 'Management accounting is the "battle guide": internal only, forward-looking, flexible format, no fixed interval.'
-        },
+        }
+    ];
+    var questionsCh2 = [
         {
             q: 'Q7. 會計等式是？',
             qEn: 'Q7. What is the accounting equation?',
@@ -2427,69 +2451,77 @@
         }
     ];
 
-    var quizBox = document.getElementById('quiz-box');
-    var quizScore = document.getElementById('quiz-score');
-    var answered = 0;
-    var correct = 0;
+    function makeQuiz(boxId, scoreId, questions) {
+        var box = document.getElementById(boxId);
+        var scoreEl = document.getElementById(scoreId);
+        var answered = 0;
+        var correct = 0;
 
-    function buildQuiz() {
-        quizBox.innerHTML = '';
-        quizScore.textContent = '';
-        answered = 0;
-        correct = 0;
-        questions.forEach(function (item, qi) {
-            var div = document.createElement('div');
-            div.className = 'quiz-q';
-            var h = document.createElement('h4');
-            h.innerHTML = '<div>' + item.q + '</div><div class="quiz-en en-text">' + item.qEn + '</div>';
-            div.appendChild(h);
-            var fb = document.createElement('div');
-            fb.className = 'quiz-feedback';
-            item.opts.forEach(function (opt, oi) {
-                var btn = document.createElement('button');
-                btn.className = 'quiz-opt';
-                btn.innerHTML = '<div>' + opt + '</div><div class="quiz-en en-text">' + item.optsEn[oi] + '</div>';
-                btn.addEventListener('click', function () {
-                    if (btn.disabled) return;
-                    var all = div.querySelectorAll('.quiz-opt');
-                    all.forEach(function (b) { b.disabled = true; });
-                    if (oi === item.ans) {
-                        btn.classList.add('correct');
-                        fb.innerHTML = '<div>✓ 答對！' + item.why + '</div><div class="quiz-en en-text">Correct! ' + item.whyEn + '</div>';
-                        fb.style.color = '#27ae60';
-                        correct++;
-                    } else {
-                        btn.classList.add('wrong');
-                        all[item.ans].classList.add('correct');
-                        fb.innerHTML = '<div>✗ 答錯了。' + item.why + '</div><div class="quiz-en en-text">Incorrect. ' + item.whyEn + '</div>';
-                        fb.style.color = '#e74c3c';
-                    }
-                    answered++;
-                    updateScore();
-                });
-                div.appendChild(btn);
-            });
-            div.appendChild(fb);
-            quizBox.appendChild(div);
-        });
-    }
-
-    function updateScore() {
-        quizScore.textContent = '得分：' + correct + ' / ' + questions.length;
-        if (answered === questions.length) {
-            if (correct === questions.length) {
-                quizScore.textContent += ' — 滿分！太厲害了！';
-                confetti();
-            } else if (correct >= 7) {
-                quizScore.textContent += ' — 不錯！再翻翻上面的翻卡吧！';
-            } else {
-                quizScore.textContent += ' — 加油！重溫筆記後再挑戰一次！';
+        function updateScore() {
+            scoreEl.textContent = '得分：' + correct + ' / ' + questions.length;
+            if (answered === questions.length) {
+                if (correct === questions.length) {
+                    scoreEl.textContent += ' — 滿分！太厲害了！';
+                    confetti();
+                } else if (correct >= Math.ceil(questions.length * 2 / 3)) {
+                    scoreEl.textContent += ' — 不錯！再翻翻上面的翻卡吧！';
+                } else {
+                    scoreEl.textContent += ' — 加油！重溫筆記後再挑戰一次！';
+                }
             }
         }
+
+        function build() {
+            box.innerHTML = '';
+            scoreEl.textContent = '';
+            answered = 0;
+            correct = 0;
+            questions.forEach(function (item, qi) {
+                var div = document.createElement('div');
+                div.className = 'quiz-q';
+                var h = document.createElement('h4');
+                h.innerHTML = '<div>' + item.q + '</div><div class="quiz-en en-text">' + item.qEn + '</div>';
+                div.appendChild(h);
+                var fb = document.createElement('div');
+                fb.className = 'quiz-feedback';
+                item.opts.forEach(function (opt, oi) {
+                    var btn = document.createElement('button');
+                    btn.className = 'quiz-opt';
+                    btn.innerHTML = '<div>' + opt + '</div><div class="quiz-en en-text">' + item.optsEn[oi] + '</div>';
+                    btn.addEventListener('click', function () {
+                        if (btn.disabled) return;
+                        var all = div.querySelectorAll('.quiz-opt');
+                        all.forEach(function (b) { b.disabled = true; });
+                        if (oi === item.ans) {
+                            btn.classList.add('correct');
+                            fb.innerHTML = '<div>✓ 答對！' + item.why + '</div><div class="quiz-en en-text">Correct! ' + item.whyEn + '</div>';
+                            fb.style.color = '#27ae60';
+                            correct++;
+                        } else {
+                            btn.classList.add('wrong');
+                            all[item.ans].classList.add('correct');
+                            fb.innerHTML = '<div>✗ 答錯了。' + item.why + '</div><div class="quiz-en en-text">Incorrect. ' + item.whyEn + '</div>';
+                            fb.style.color = '#e74c3c';
+                        }
+                        answered++;
+                        updateScore();
+                    });
+                    div.appendChild(btn);
+                });
+                div.appendChild(fb);
+                box.appendChild(div);
+            });
+        }
+        return build;
     }
 
-    document.getElementById('quiz-reset').addEventListener('click', buildQuiz);
-    buildQuiz();
+    var buildQuizCh1 = makeQuiz('quiz-box', 'quiz-score', questionsCh1);
+    var buildQuizCh2 = makeQuiz('quiz-box-ch2', 'quiz-score-ch2', questionsCh2);
+
+    document.getElementById('quiz-reset').addEventListener('click', buildQuizCh1);
+    document.getElementById('quiz-reset-ch2').addEventListener('click', buildQuizCh2);
+    buildQuizCh1();
+    buildQuizCh2();
 
     /* ---------- 撒花 ---------- */
     function confetti() {
