@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一章：會計概述 Chapter 1: Overview of Accounting</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e74c3c;
+            --accent-light: #fadbd8;
+            --bg: #fdfefe;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #5d6d7e;
+            --border: #d5dbdb;
+            --tip-bg: #eaf2f8;
+            --tip-border: #5dade2;
+            --exam-bg: #fdedec;
+            --exam-border: #e74c3c;
+            --example-bg: #eafaf1;
+            --example-border: #27ae60;
+            --gradient-1: #1a5276;
+            --gradient-2: #2980b9;
+            --code-bg: #f8f9f9;
+            --shadow: rgba(0,0,0,0.04);
+            --toolbar-bg: rgba(255,255,255,0.92);
+        }
+
+        [data-theme="dark"] {
+            --primary: #5dade2;
+            --primary-light: #85c1e9;
+            --bg: #1a1a2e;
+            --card-bg: #16213e;
+            --text: #e8e8e8;
+            --text-light: #a0a0b8;
+            --border: #2a3a5c;
+            --tip-bg: #1a2a4a;
+            --exam-bg: #3a1a1a;
+            --example-bg: #1a3a2a;
+            --code-bg: #0f0f23;
+            --shadow: rgba(0,0,0,0.3);
+            --toolbar-bg: rgba(22,33,62,0.92);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ---------- 閱讀進度條 ---------- */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60, #2980b9);
+            background-size: 300% 100%;
+            animation: progressSlide 3s linear infinite;
+            z-index: 999;
+        }
+
+        @keyframes progressSlide {
+            0% { background-position: 0% 0; }
+            100% { background-position: 300% 0; }
+        }
+
+        /* ---------- 右上工具列 ---------- */
+        #toolbar {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 500;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #toolbar button {
+            background: var(--toolbar-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 20px;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.82rem;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        #toolbar button:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        /* ---------- Header ---------- */
+        header {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        header h1, header h2, header .subtitle {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 打字機游標 */
+        #typewriter::after {
+            content: '|';
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 漂浮符號 */
+        .float-layer {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .float-layer span {
+            position: absolute;
+            bottom: -40px;
+            color: rgba(255,255,255,0.25);
+            font-weight: 700;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        header .subtitle {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .scroll-hint {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            opacity: 0.85;
+            position: relative;
+            z-index: 2;
+            animation: bounce 1.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* ---------- Nav ---------- */
+        nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: background 0.3s, transform 0.35s ease;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-110%);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            display: block;
+            padding: 0.4rem 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(26,82,118,0.4);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px var(--shadow);
+            scroll-margin-top: 80px;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        section:hover {
+            box-shadow: 0 6px 24px var(--shadow);
+        }
+
+        /* ---------- 滾動進場動畫 ---------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 3px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-title .num {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .section-title:hover .num {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .section-title .collapse-icon {
+            margin-left: auto;
+            font-size: 1rem;
+            color: var(--text-light);
+            transition: transform 0.3s;
+        }
+
+        section.collapsed .section-body {
+            display: none;
+        }
+
+        section.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--primary-light);
+            margin: 1.2rem 0 0.6rem;
+        }
+
+        h4 {
+            font-size: 1rem;
+            color: var(--text);
+            margin: 1rem 0 0.4rem;
+            font-style: italic;
+        }
+
+        p, li {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        .en, [style*="5d6d7e"] {
+            transition: opacity 0.3s;
+        }
+
+        body.hide-en .en-text {
+            display: none;
+        }
+
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--code-bg);
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .bilingual:hover {
+            transform: translateX(4px);
+            box-shadow: -4px 0 0 var(--primary-light);
+        }
+
+        .bilingual .zh {
+            font-weight: 500;
+        }
+
+        .bilingual .en {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        body.hide-en .bilingual {
+            grid-template-columns: 1fr;
+        }
+
+        /* ---------- 流程步驟 ---------- */
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: linear-gradient(135deg, #eaf2f8, #d6eaf8);
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .flow-steps {
+            background: linear-gradient(135deg, #1a2a4a, #16213e);
+        }
+
+        .flow-step {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            border: 2px solid var(--primary-light);
+            white-space: nowrap;
+            cursor: default;
+            animation: stepPulse 2s ease-in-out infinite;
+        }
+
+        .flow-step:nth-child(3) { animation-delay: 0.3s; }
+        .flow-step:nth-child(5) { animation-delay: 0.6s; }
+        .flow-step:nth-child(7) { animation-delay: 0.9s; }
+
+        [data-theme="dark"] .flow-step {
+            background: #0f0f23;
+        }
+
+        @keyframes stepPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(41,128,185,0); }
+            50% { transform: scale(1.06); box-shadow: 0 0 12px rgba(41,128,185,0.5); }
+        }
+
+        .flow-arrow {
+            font-size: 1.2rem;
+            color: var(--primary-light);
+            animation: arrowNudge 1s ease-in-out infinite;
+        }
+
+        @keyframes arrowNudge {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+        }
+
+        /* ---------- 提示盒 ---------- */
+        .tip-box {
+            background: var(--tip-bg);
+            border-left: 4px solid var(--tip-border);
+            padding: 1rem 1.2rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+            transition: transform 0.2s;
+        }
+
+        .tip-box:hover {
+            transform: translateX(4px);
+        }
+
+        .tip-box .label {
+            font-weight: 700;
+            color: var(--tip-border);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .tip-box p {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .exam-alert {
+            background: var(--exam-bg);
+            border-left: 4px solid var(--exam-border);
+            padding: 1rem 1.2rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+            transition: transform 0.2s;
+        }
+
+        .exam-alert:hover {
+            transform: translateX(4px);
+        }
+
+        .exam-alert .label {
+            font-weight: 700;
+            color: var(--exam-border);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .exam-alert p {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .example-box {
+            background: var(--example-bg);
+            border-left: 4px solid var(--example-border);
+            padding: 1rem 1.2rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+            transition: transform 0.2s;
+        }
+
+        .example-box:hover {
+            transform: translateX(4px);
+        }
+
+        .example-box .label {
+            font-weight: 700;
+            color: var(--example-border);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .example-box p {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .keywords span {
+            background: #f0e6ff;
+            color: #6c3483;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        [data-theme="dark"] .keywords span {
+            background: #2a1a3a;
+            color: #d7bde2;
+        }
+
+        .keywords span:hover {
+            transform: scale(1.15) rotate(-3deg);
+            background: #6c3483;
+            color: white;
+        }
+
+        .keywords span.copied {
+            background: #27ae60;
+            color: white;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            transition: background 0.2s;
+        }
+
+        .comparison-table tbody tr {
+            transition: transform 0.2s;
+        }
+
+        .comparison-table tbody tr:hover td {
+            background: var(--tip-bg);
+        }
+
+        .cycle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .cycle-card {
+            background: linear-gradient(135deg, var(--code-bg), var(--tip-bg));
+            border-radius: 10px;
+            padding: 1.2rem;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .cycle-card:hover {
+            transform: translateY(-6px) rotate(0.5deg);
+            box-shadow: 0 10px 24px var(--shadow);
+        }
+
+        .cycle-card .step-num {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: transform 0.3s;
+        }
+
+        .cycle-card:hover .step-num {
+            transform: scale(1.3) rotate(15deg);
+        }
+
+        .cycle-card h4 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+            font-style: normal;
+        }
+
+        .cycle-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ---------- 翻卡 ---------- */
+        .flash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .flashcard {
+            perspective: 800px;
+            cursor: pointer;
+            height: 230px;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flash-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .flash-face .flash-en {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        .flash-front .flash-en {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .flash-back .flash-en {
+            color: var(--text-light);
+        }
+
+        .flash-front {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            font-size: 1.05rem;
+        }
+
+        .flash-back {
+            background: var(--tip-bg);
+            color: var(--text);
+            border: 2px solid var(--primary-light);
+            transform: rotateY(180deg);
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .flash-hint {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- 測驗 ---------- */
+        .quiz-q {
+            background: var(--code-bg);
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .quiz-q h4 {
+            font-style: normal;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .quiz-opt {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-opt:hover:not(:disabled) {
+            border-color: var(--primary-light);
+            transform: translateX(6px);
+        }
+
+        .quiz-opt:disabled {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .quiz-opt.correct {
+            border-color: #27ae60;
+            background: #d5f5e3;
+            color: #1e8449;
+            animation: correctPop 0.4s;
+        }
+
+        [data-theme="dark"] .quiz-opt.correct {
+            background: #1a3a2a;
+        }
+
+        .quiz-opt.wrong {
+            border-color: #e74c3c;
+            background: #fadbd8;
+            color: #922b21;
+            animation: wrongShake 0.4s;
+        }
+
+        [data-theme="dark"] .quiz-opt.wrong {
+            background: #3a1a1a;
+        }
+
+        @keyframes correctPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .quiz-feedback {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            min-height: 1.4em;
+        }
+
+        .quiz-en {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .quiz-q h4 .quiz-en {
+            display: block;
+            margin-top: 0.2rem;
+        }
+
+        .quiz-opt .quiz-en {
+            display: block;
+        }
+
+        #quiz-score {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1.2rem 0;
+        }
+
+        #quiz-reset {
+            display: block;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 0.6rem 2rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #quiz-reset:hover {
+            transform: scale(1.08);
+        }
+
+        /* ---------- 螢光筆 ---------- */
+        .hl {
+            border-radius: 3px;
+            padding: 0 1px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .hl-yellow { background: rgba(255, 235, 59, 0.55); }
+        .hl-green { background: rgba(165, 214, 167, 0.65); }
+        .hl-pink { background: rgba(244, 143, 177, 0.55); }
+        .hl-blue { background: rgba(144, 202, 249, 0.6); }
+
+        [data-theme="dark"] .hl-yellow { background: rgba(255, 235, 59, 0.32); }
+        [data-theme="dark"] .hl-green { background: rgba(165, 214, 167, 0.35); }
+        [data-theme="dark"] .hl-pink { background: rgba(244, 143, 177, 0.35); }
+        [data-theme="dark"] .hl-blue { background: rgba(144, 202, 249, 0.35); }
+
+        #hl-toolbar {
+            position: fixed;
+            display: none;
+            align-items: center;
+            gap: 0.45rem;
+            background: var(--toolbar-bg);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 0.5rem 0.7rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        #hl-toolbar.show {
+            display: flex;
+            animation: hlPop 0.2s ease;
+        }
+
+        @keyframes hlPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #hl-toolbar button[data-color] {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--dot);
+            border: 2px solid rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.15s;
+            padding: 0;
+        }
+
+        #hl-toolbar button[data-color]:hover,
+        #hl-toolbar button[data-color]:active {
+            transform: scale(1.25);
+        }
+
+        .hl-sep {
+            width: 1px;
+            align-self: stretch;
+            background: var(--border);
+        }
+
+        #hl-clear {
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--text);
+            padding: 0 0.2rem;
+        }
+
+        #hl-popup {
+            position: fixed;
+            display: none;
+            z-index: 1000;
+        }
+
+        #hl-popup.show {
+            display: block;
+        }
+
+        #hl-remove {
+            background: var(--toolbar-bg);
+            border: 1px solid var(--exam-border);
+            color: var(--exam-border);
+            border-radius: 16px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.82rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            white-space: nowrap;
+        }
+
+        /* ---------- 回頂部 ---------- */
+        #back-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 500;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+        }
+
+        #back-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #back-top:hover {
+            transform: translateY(-4px) scale(1.1);
+        }
+
+    /* ---------- 螢光筆 Highlight（支援平板觸控） ---------- */
+    var hlToolbar = document.getElementById('hl-toolbar');
+    var hlPopup = document.getElementById('hl-popup');
+    var hlMain = document.querySelector('main');
+    var hlRemoveBtn = document.getElementById('hl-remove');
+    var pendingRange = null;
+    var pendingSpan = null;
+    var HL_KEY = 'bafs-ch1-highlights';
+    var HL_COLORS = ['hl-yellow', 'hl-green', 'hl-pink', 'hl-blue'];
+
+    function hlNodePath(node, root) {
+        var path = [];
+        while (node && node !== root) {
+            var parent = node.parentNode;
+            if (!parent) return null;
+            path.unshift(Array.prototype.indexOf.call(parent.childNodes, node));
+            node = parent;
+        }
+        return node === root ? path : null;
+    }
+
+    function hlNodeByPath(path, root) {
+        var node = root;
+        for (var i = 0; i < path.length; i++) {
+            if (!node || !node.childNodes || path[i] >= node.childNodes.length) return null;
+            node = node.childNodes[path[i]];
+        }
+        return node;
+    }
+
+    function hlLoad() {
+        try {
+            var raw = localStorage.getItem(HL_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+    }
+
+    function hlSave(list) {
+        try { localStorage.setItem(HL_KEY, JSON.stringify(list)); } catch (e) {}
+    }
+
+    function hlApplyToRange(range, color) {
+        var walker = document.createTreeWalker(hlMain, NodeFilter.SHOW_TEXT, {
+            acceptNode: function (node) {
+                if (node.parentNode && node.parentNode.closest && node.parentNode.closest('span.hl')) return NodeFilter.FILTER_REJECT;
+                if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                try {
+                    if (!range.intersectsNode(node)) return NodeFilter.FILTER_REJECT;
+                } catch (e) { return NodeFilter.FILTER_REJECT; }
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        if (!nodes.length) return false;
+        nodes.forEach(function (node) {
+            var start = (node === range.startContainer) ? range.startOffset : 0;
+            var end = (node === range.endContainer) ? range.endOffset : node.nodeValue.length;
+            if (start < 0) start = 0;
+            if (end > node.nodeValue.length) end = node.nodeValue.length;
+            if (start >= end) return;
+            var target = node;
+            if (start > 0) target = target.splitText(start);
+            if (end - start < target.nodeValue.length) target.splitText(end - start);
+            var span = document.createElement('span');
+            span.className = 'hl ' + color;
+            target.parentNode.insertBefore(span, target);
+            span.appendChild(target);
+        });
+        return true;
+    }
+
+    function hlSnapshot() {
+        var list = [];
+        var spans = hlMain.querySelectorAll('span.hl');
+        for (var i = 0; i < spans.length; i++) {
+            var r = document.createRange();
+            r.selectNodeContents(spans[i]);
+            var sp = hlNodePath(r.startContainer, hlMain);
+            var ep = hlNodePath(r.endContainer, hlMain);
+            if (!sp || !ep) continue;
+            var color = 'hl-yellow';
+            for (var j = 0; j < HL_COLORS.length; j++) {
+                if (spans[i].classList.contains(HL_COLORS[j])) { color = HL_COLORS[j]; break; }
+            }
+            list.push({ sp: sp, so: r.startOffset, ep: ep, eo: r.endOffset, color: color });
+        }
+        hlSave(list);
+    }
+
+    function hlComparePath(a, b) {
+        var n = Math.min(a.length, b.length);
+        for (var i = 0; i < n; i++) {
+            if (a[i] !== b[i]) return a[i] - b[i];
+        }
+        return a.length - b.length;
+    }
+
+    function hlRestore() {
+        var list = hlLoad();
+        list.sort(function (x, y) { return hlComparePath(y.sp, x.sp); });
+        list.forEach(function (item) {
+            try {
+                var sc = hlNodeByPath(item.sp, hlMain);
+                var ec = hlNodeByPath(item.ep, hlMain);
+                if (!sc || !ec) return;
+                if (sc.nodeType === 3 && item.so > sc.nodeValue.length) return;
+                if (ec.nodeType === 3 && item.eo > ec.nodeValue.length) return;
+                var r = document.createRange();
+                r.setStart(sc, item.so);
+                r.setEnd(ec, item.eo);
+                hlApplyToRange(r, item.color);
+            } catch (e) {}
+        });
+    }
+
+    function hlUnwrap(span) {
+        var parent = span.parentNode;
+        while (span.firstChild) parent.insertBefore(span.firstChild, span);
+        parent.removeChild(span);
+        if (parent.normalize) parent.normalize();
+    }
+
+    function hlHideToolbar() {
+        hlToolbar.classList.remove('show');
+        pendingRange = null;
+    }
+
+    function hlHidePopup() {
+        hlPopup.classList.remove('show');
+        pendingSpan = null;
+    }
+
+    function hlShowToolbar(rect) {
+        hlHidePopup();
+        hlToolbar.classList.add('show');
+        var tw = hlToolbar.offsetWidth || 260;
+        var th = hlToolbar.offsetHeight || 56;
+        var x = rect.left + rect.width / 2 - tw / 2;
+        x = Math.max(8, Math.min(x, window.innerWidth - tw - 8));
+        var y = rect.top - th - 12;
+        if (y < 8) y = rect.bottom + 12;
+        hlToolbar.style.left = x + 'px';
+        hlToolbar.style.top = y + 'px';
+    }
+
+    function hlShowPopup(span, x, y) {
+        hlHideToolbar();
+        pendingSpan = span;
+        hlPopup.classList.add('show');
+        var pw = hlPopup.offsetWidth || 120;
+        var ph = hlPopup.offsetHeight || 36;
+        x = Math.max(8, Math.min(x - pw / 2, window.innerWidth - pw - 8));
+        y = Math.max(8, y - ph - 12);
+        hlPopup.style.left = x + 'px';
+        hlPopup.style.top = y + 'px';
+    }
+
+    var hlDebounce = null;
+    document.addEventListener('selectionchange', function () {
+        clearTimeout(hlDebounce);
+        hlDebounce = setTimeout(hlCheckSelection, 150);
+    });
+
+    function hlCheckSelection() {
+        var sel = window.getSelection();
+        if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hlHideToolbar(); return; }
+        var text = sel.toString();
+        if (!text || !text.trim()) { hlHideToolbar(); return; }
+        var range;
+        try { range = sel.getRangeAt(0); } catch (e) { return; }
+        var node = range.commonAncestorContainer;
+        if (node.nodeType === 3) node = node.parentNode;
+        if (!node || !hlMain.contains(node)) { hlHideToolbar(); return; }
+        if (range.getBoundingClientRect().width === 0 && range.getBoundingClientRect().height === 0) return;
+        pendingRange = range.cloneRange();
+        hlShowToolbar(range.getBoundingClientRect());
+    }
+
+    hlToolbar.querySelectorAll('[data-color]').forEach(function (btn) {
+        btn.addEventListener('mousedown', function (e) { e.preventDefault(); });
+        btn.addEventListener('click', function () {
+            if (!pendingRange) return;
+            try {
+                if (hlApplyToRange(pendingRange, btn.getAttribute('data-color'))) hlSnapshot();
+            } catch (e) {}
+            try { window.getSelection().removeAllRanges(); } catch (e) {}
+            hlHideToolbar();
+        });
+    });
+
+    document.getElementById('hl-clear').addEventListener('mousedown', function (e) { e.preventDefault(); });
+    document.getElementById('hl-clear').addEventListener('click', function () {
+        var spans = hlMain.querySelectorAll('span.hl');
+        for (var i = 0; i < spans.length; i++) hlUnwrap(spans[i]);
+        hlSnapshot();
+        try { window.getSelection().removeAllRanges(); } catch (e) {}
+        hlHideToolbar();
+    });
+
+    hlRemoveBtn.addEventListener('click', function () {
+        if (pendingSpan && hlMain.contains(pendingSpan)) {
+            hlUnwrap(pendingSpan);
+            hlSnapshot();
+        }
+        hlHidePopup();
+    });
+
+    hlMain.addEventListener('click', function (e) {
+        var t = e.target;
+        var span = (t && t.closest) ? t.closest('span.hl') : null;
+        var sel = window.getSelection();
+        if (span && hlMain.contains(span) && (!sel || sel.isCollapsed)) {
+            hlShowPopup(span, e.clientX, e.clientY);
+        } else {
+            hlHidePopup();
+        }
+    });
+
+    document.addEventListener('pointerdown', function (e) {
+        var t = e.target;
+        var inside = t && t.closest && (t.closest('#hl-toolbar') || t.closest('#hl-popup') || t.closest('span.hl'));
+        if (!inside) hlHidePopup();
+    });
+
+    window.addEventListener('scroll', function () {
+        hlHideToolbar();
+        hlHidePopup();
+    }, { passive: true });
+
+    /* 電腦鍵盤快捷鍵：Alt+1~4 上色，Esc 關閉工具列 */
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            hlHideToolbar();
+            hlHidePopup();
+            return;
+        }
+        if (!e.altKey || e.ctrlKey || e.metaKey) return;
+        var map = { '1': 'hl-yellow', '2': 'hl-green', '3': 'hl-pink', '4': 'hl-blue' };
+        var color = map[e.key];
+        if (!color) return;
+        var sel = window.getSelection();
+        if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+        var range;
+        try { range = sel.getRangeAt(0); } catch (err) { return; }
+        var node = range.commonAncestorContainer;
+        if (node.nodeType === 3) node = node.parentNode;
+        if (!node || !hlMain.contains(node)) return;
+        var text = sel.toString();
+        if (!text || !text.trim()) return;
+        e.preventDefault();
+        try {
+            if (hlApplyToRange(range, color)) hlSnapshot();
+        } catch (err) {}
+        try { sel.removeAllRanges(); } catch (err) {}
+        hlHideToolbar();
+    });
+
+    hlRestore();
+
+    /* ---------- 撒花 ---------- */
+        .confetti {
+            position: fixed;
+            top: -12px;
+            width: 10px;
+            height: 14px;
+            z-index: 1000;
+            pointer-events: none;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(105vh) rotate(720deg);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.5rem; }
+            header h2 { font-size: 0.95rem; }
+            nav a { font-size: 0.78rem; padding: 0.3rem 0.7rem; }
+            section { padding: 1.5rem 1.2rem; }
+            .bilingual { grid-template-columns: 1fr; }
+            .flow-steps { justify-content: center; }
+            .comparison-table { font-size: 0.8rem; }
+            .comparison-table th, .comparison-table td { padding: 0.5rem; }
+            #toolbar { top: auto; bottom: 84px; right: 16px; flex-direction: column; }
+        }
+
+        @media print {
+            nav, #toolbar, #back-top, #progress, #quiz-section, #flash-section { display: none; }
+            section { break-inside: avoid; box-shadow: none; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div id="toolbar">
+    <button id="theme-btn" title="切換深色 / 淺色模式">🌙 深色</button>
+    <button id="lang-btn" title="隱藏 / 顯示英文">EN 隱藏英文</button>
+</div>
+
+<header>
+    <div class="float-layer" id="float-layer"></div>
+    <h1 id="typewriter">第一章：會計概述</h1>
+    <h2>Chapter 1: Overview of Accounting</h2>
+    <div class="scroll-hint">▼ 向下滑動開始複習 ▼</div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#s1">§1 企業個體、簿記與會計</a></li>
+        <li><a href="#s2">§2 四種主要功能</a></li>
+        <li><a href="#s3">§3 財務報表</a></li>
+        <li><a href="#s4">§4 財務 vs 管理會計</a></li>
+        <li><a href="#s5">§5 決策中的角色</a></li>
+        <li><a href="#s6">§6 會計師的角色</a></li>
+        <li><a href="#s7">§7 會計循環</a></li>
+        <li><a href="#flash-section">🃏 翻卡</a></li>
+        <li><a href="#quiz-section">📝 測驗</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <!-- Section 1 -->
+    <section id="s1" class="reveal">
+        <div class="section-title"><span class="num">1</span><span>甚麼是企業個體、簿記與會計？<br>What are Business Entities, Bookkeeping, and Accounting?</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <div class="bilingual">
+            <div class="zh">企業個體是指通過售賣貨品或提供服務以賺取利潤的個體。</div>
+            <div class="en en-text">A business entity refers to an entity that earns profits by selling goods or providing services.</div>
+        </div>
+        <div class="bilingual">
+            <div class="zh">簿記就像是寫日記，它的重點在於記錄日常交易及保存財務記錄。</div>
+            <div class="en en-text">Bookkeeping is like writing a diary, and its focus is on recording daily transactions and preserving financial records.</div>
+        </div>
+        <div class="bilingual">
+            <div class="zh">會計則是分析日記，它的範疇比簿記更廣，目的是為企業個體提供財務資訊，幫助持份者作出決策。</div>
+            <div class="en en-text">Accounting is like analyzing a diary, and its scope is broader than bookkeeping, and its purpose is to provide financial information to help stakeholders make decisions.</div>
+        </div>
+
+        <div class="tip-box">
+            <div class="label">同學提提你 Student Tip</div>
+            <p>「簿記」只是手動把發生過的事寫下來；「會計」則是把這些記錄整理、分析，變成一份老闆和投資者都能看懂的「成績單」。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">"Bookkeeping" is just writing down what happened by hand; "Accounting" is organizing and analyzing these records into a "report card" that owners and investors can understand.</p>
+        </div>
+
+        <p>一般而言，會計資訊會以財務報表的形式展示。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Generally, accounting information is presented in the form of financial statements.</p>
+
+        <h3>(a) 會計的目的 Purposes of Accounting</h3>
+        <ul>
+            <li>反映企業的財務表現，不論是錄得利潤或是虧損。<br><span class="en-text" style="color:#5d6d7e;font-size:0.88rem;">To reflect the financial performance of a business, whether making a profit or incurring a loss.</span></li>
+            <li>報告企業的財務狀況，包括資產、負債及資本。<br><span class="en-text" style="color:#5d6d7e;font-size:0.88rem;">To report the financial position of a business, including assets, liabilities and capital.</span></li>
+            <li>為東主提供有關企業優勢和劣勢的資訊，以便作出進一步的投資決策。<br><span class="en-text" style="color:#5d6d7e;font-size:0.88rem;">To provide information for owners about the strengths and weaknesses of a business for further investment decisions.</span></li>
+        </ul>
+
+        <h3>(b) 會計的角色 Role of Accounting</h3>
+        <p>有系統地記錄財務交易，並編製成會計資訊，以供管理人員作出商業決策。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">To systematically record financial transactions and compile them into accounting information for management to make business decisions.</p>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="s2" class="reveal">
+        <div class="section-title"><span class="num">2</span><span>會計的四種主要功能<br>Four Main Functions of Accounting</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>會計程序由以下四個核心步驟組成。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">The accounting process consists of the following four core steps.</p>
+
+        <div class="flow-steps">
+            <span class="flow-step">記錄 Recording</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">分類 Classifying</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">歸納 Summarising</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">溝通 Communicating</span>
+        </div>
+
+        <div class="tip-box">
+            <div class="label">口訣 Mnemonic</div>
+            <p>取其英文首字母：<strong>R – C – S – C</strong>（Recording – Classifying – Summarising – Communicating）</p>
+        </div>
+
+        <h3>(a) 記錄交易事項 Recording Transactions</h3>
+        <p>這是會計的基本功能，也是會計程序的首個步驟。企業須保存財務交易記錄，作為編製會計資訊的基礎。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">This is the primary function of accounting and the initial step in the accounting process. A business needs to keep records of its financial transactions as the basis for preparing accounting data.</p>
+        <div class="keywords">
+            <span>帳簿 books</span>
+            <span>電子檔案 electronic files</span>
+            <span>原始數據 raw data</span>
+        </div>
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>班會財政碧琪負責記錄影印和購買文具等各項交易，並妥善保存支出的收據。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Peggy, the class financial secretary, recorded transactions like photocopying and purchasing stationery, and kept all receipts properly.</p>
+        </div>
+        <div class="example-box">
+            <div class="label">日常應用 Daily Application</div>
+            <p>零售業常用銷售點系統。收銀員使用條碼掃瞄器掃瞄條碼後，交易資訊會自動記錄在電腦內。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Retail businesses commonly use a point-of-sale system. After the cashier scans the barcode with a barcode reader, the transaction information is automatically recorded in the computer.</p>
+        </div>
+
+        <h3>(b) 分類已記錄的數據 Classifying Recorded Data</h3>
+        <p>指按交易事項的性質，有系統地將記錄下來的數據歸類。這樣做的目的是為了方便管理人員了解企業的表現。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Refers to the systematic grouping of recorded data according to the nature of each transaction. This is done to facilitate management's understanding of the business performance.</p>
+        <div class="keywords">
+            <span>資產 assets</span>
+            <span>負債 liabilities</span>
+            <span>資本 capital</span>
+            <span>收益 revenues</span>
+            <span>費用 expenses</span>
+        </div>
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>四甲班班會將購買圓珠筆、鉛筆及直尺等支出，統一歸納為「文具費」。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Peggy groups purchases of pens, pencils and rulers under "stationery expenses".</p>
+        </div>
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>超級市場將向顧客銷售水果、蔬菜、肉類及飲料等收入，全部歸入「銷貨」或「營業額」。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">A supermarket groups sales revenues of fruits, vegetables, meat and drinks under "sales" or "turnover".</p>
+        </div>
+
+        <h3>(c) 歸納已分類的資訊 Summarising Classified Information</h3>
+        <p>指將已分類的數據，以容易理解和具意義的方式展示出來。一般而言，企業會以財務報表的形式展示這些歸納後的數據。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Involves the presentation of classified data in an understandable and meaningful way. Generally, businesses present these summarised data in the form of financial statements.</p>
+        <div class="keywords">
+            <span>財務報表 financial statements</span>
+            <span>損益表 Statement of Profit or Loss</span>
+            <span>財務狀況表 Statement of Financial Position</span>
+        </div>
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>碧琪在每月月終總結該月的總收入、總支出和餘額，展示資金運用情況。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Peggy summarised the total of receipts, spending and remaining funds at the end of each month.</p>
+        </div>
+
+        <h3>(d) 向使用者傳遞已歸納的資訊 Communicating Summarised Information to Users</h3>
+        <p>將已歸納的會計資訊編製成財務報表向使用者發布。這是會計的最後一個步驟，也是最重要的功能。這能協助使用者更了解企業的財務表現，從而作出相關的商業決定。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Reporting summarised accounting information to users through financial statements. This is the last step and the most important function of accounting. This helps users better understand the financial performance of a business to make appropriate business decisions.</p>
+        <div class="keywords">
+            <span>解釋 explanation</span>
+            <span>比率 ratios</span>
+            <span>圖表 charts</span>
+            <span>簡單用語 simple terms</span>
+        </div>
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>碧琪編製收支報表報告給班會同學，主席參考報表後，計劃向同學徵收班會費。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Peggy presents the monthly statement to the classmates, and the chairperson uses this information to plan for raising money.</p>
+        </div>
+
+        <div class="tip-box">
+            <div class="label">溫馨提示 Small Tip</div>
+            <p>溝通功能是為了讓外行人也能明白會計資訊。例如：會計師會將專業術語「非流動資產」轉化為「企業擁有的長期資源」，這就是溝通功能的體現。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">The communicating function is to make outsiders understand accounting information as well. For example, an accountant converting the technical term "non-current assets" into "long-term resources owned by the business" is an expression of the communication function.</p>
+        </div>
+
+        <div class="exam-alert">
+            <div class="label">考場防錯警示 Exam Trap Alert</div>
+            <p>看到「記在原始分錄簿」代表「記錄」功能。</p>
+            <p>看到「過帳到分類帳」或「按性質分類」代表「分類」功能。</p>
+            <p>看到「編製報表」代表「歸納」功能。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">"Record in the books of original entry" = Recording. "Post to ledgers" or "classify by nature" = Classifying. "Prepare statements" = Summarising.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="s3" class="reveal">
+        <div class="section-title"><span class="num">3</span><span>常見的兩種財務報表<br>Two Popular Forms of Financial Statements</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <h3>(a) 損益表 Income Statement</h3>
+        <p>損益表又稱為全面收益表。它總結公司在特定期間內有關利潤或虧損的財務表現。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Income statement is also known as the statement of comprehensive income. It summarises the financial performance (its profit and loss) of a company over a period of time.</p>
+
+        <h3>(b) 財務狀況表 Statement of Financial Position</h3>
+        <p>財務狀況表以往稱為資產負債表。它總結公司在特定日期的財務狀況，即資產、負債和資本。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Statement of financial position was formerly known as the balance sheet. It summarises the financial position (i.e., the assets, liabilities and capital) of a company on a given date.</p>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>報表</th>
+                    <th>反映內容</th>
+                    <th>時間範圍</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>損益表</strong><br>Income Statement</td>
+                    <td>利潤或虧損<br>Profit or Loss</td>
+                    <td>特定期間<br>A period of time</td>
+                </tr>
+                <tr>
+                    <td><strong>財務狀況表</strong><br>Statement of Financial Position</td>
+                    <td>資產、負債、資本<br>Assets, Liabilities, Capital</td>
+                    <td>特定日期<br>A given date</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="s4" class="reveal">
+        <div class="section-title"><span class="num">4</span><span>財務會計與管理會計<br>Financial Accounting vs Management Accounting</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>會計主要分為兩個範疇。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Accounting is mainly divided into two branches.</p>
+        <p>財務會計就像是「給家長看的成績單」，管理會計則是「給玩家自己看的作戰秘笈」。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Financial accounting is like a "report card for parents", while management accounting is like a "battle guide for players".</p>
+
+        <h3>(a) 財務會計（成績單）Financial Accounting (Report Card)</h3>
+        <ul>
+            <li>主要功能是向內部使用者和外部使用者報告企業的財務資訊。</li>
+            <li>內部使用者包括東主和管理人員。</li>
+            <li>外部使用者包括潛在投資者、債權人和稅務局。</li>
+            <li>財務會計記錄歷史數據，並以一系列符合既定標準的財務報表展示。</li>
+            <li>這些報表會定期編製，一般是每月、每季、每半年或每年一次。</li>
+        </ul>
+
+        <h3>(b) 一般有借方餘額的帳戶出現了貸方餘額的處理</h3>
+        <p>企業的銀行存款帳戶可以有貸方餘額或借方餘額。假如銀行存款帳戶有貸方餘額，這表示企業虧欠銀行款項，即銀行透支。銀行透支被視為企業的負債，在試算表中反映為貸方餘額。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">A business's bank account can have either a credit balance or a debit balance. If a bank account has a credit balance, it means the business owes money to the bank, which is a bank overdraft. A bank overdraft is treated as a liability and reflected as a credit balance in the trial balance.</p>
+
+        <h3>(c) 管理會計（作戰秘笈）Management Accounting (Battle Guide)</h3>
+        <ul>
+            <li>為企業內部參與日常營運的管理人員提供資訊，協助他們作出商業決定。</li>
+            <li>這些資訊一般具前瞻性，與以記錄歷史數據為主的財務會計不同。</li>
+            <li>管理會計的展示方式完全視乎管理人員的需要，不受法例和會計準則限制。</li>
+            <li>它沒有固定的編製時距。</li>
+        </ul>
+
+        <h3>(d) 成本會計與會計準則</h3>
+        <h4>成本會計 Cost Accounting</h4>
+        <ul>
+            <li>是管理會計的分支。</li>
+            <li>主要涉及分析生產過程或提供服務期間的各種成本。</li>
+            <li>它協助管理人員計劃、控制及改善流程以提高效率。</li>
+        </ul>
+
+        <h4>會計準則 Accounting Standards</h4>
+        <ul>
+            <li>為會計實務制訂原則和標準，讓不同企業的財務報表能以劃一的標準格式展示。</li>
+            <li>這便於使用者比較不同企業的表現。</li>
+        </ul>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>比較項目</th>
+                    <th>財務會計 Financial Accounting</th>
+                    <th>管理會計 Management Accounting</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>對象</strong></td>
+                    <td>內部 + 外部使用者</td>
+                    <td>僅限內部管理人員</td>
+                </tr>
+                <tr>
+                    <td><strong>時效性</strong></td>
+                    <td>歷史數據</td>
+                    <td>前瞻性資訊</td>
+                </tr>
+                <tr>
+                    <td><strong>格式</strong></td>
+                    <td>符合會計準則的標準格式</td>
+                    <td>按管理層需要自由設計</td>
+                </tr>
+                <tr>
+                    <td><strong>編製時距</strong></td>
+                    <td>定期（月/季/半年/年）</td>
+                    <td>無固定時距</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="s5" class="reveal">
+        <div class="section-title"><span class="num">5</span><span>會計在商業決策上的角色<br>Roles of Accounting in Decision-making</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>企業在作出商業決策時，會計主要在計劃和控制兩個方面發揮作用。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Accounting plays a vital role in business decision-making through planning and controlling.</p>
+
+        <div class="tip-box">
+            <div class="label">同學提提你 Student Tip</div>
+            <p>想像你在學期初設定目標要考八十分（計劃或預算），到期末拿到成績單發現只有六十分（控制或監控），這就是計劃與控制的關係。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Imagine you set a goal to get 80 marks at the start of the term (planning or budgeting), but get a report card showing only 60 marks at the end (controlling or monitoring); this is the relationship between planning and controlling.</p>
+        </div>
+
+        <h3>(a) 計劃 Planning</h3>
+        <p>協助管理人員制定目標，並計劃如何達到目標。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Assists management in setting goals and making plans to achieve them.</p>
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>鞋店行政總裁偉文在擴展業務前，須參考財務狀況表了解店鋪是否有足夠資源。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Billy, the CEO of a shoe retail chain, checks the statement of financial position to ensure sufficient resources before expansion.</p>
+        </div>
+
+        <h3>(b) 控制 Controlling</h3>
+        <p>在計劃推行後，利用會計資訊控制和監察進度，並檢討商業決策的成效。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Monitors progress and reviews the effectiveness of decisions after plans are implemented.</p>
+        <div class="example-box">
+            <div class="label">課文實例 Textbook Example</div>
+            <p>偉文在店鋪擴充後，從財務報表中得知公司利潤上升了百分之五十，從而決定繼續計劃。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">After expansion, Billy finds from financial statements that profits increased by 50% and decides to continue the plan.</p>
+        </div>
+
+        <h3>課文補充案例：兔子寵物店 Additional Case Study: Rabbit Company</h3>
+        <p>東主艾莉經營寵物用品店。由於租金和薪金上升，分店出現虧損。艾莉需要會計資訊來作決定。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Mary operates pet accessories shops. Due to rapid increases in rent and salaries, the shops are incurring losses. Mary needs accounting information to make decisions.</p>
+        <p>會計師如何提供協助？</p>
+        <ul>
+            <li>第一，會計師提供各類產品的利潤清單，協助艾莉找出並停售無利可圖的產品。</li>
+            <li>第二，會計師編製現金流量表，讓艾莉了解寵物店是否有足夠資金刊登廣告。</li>
+        </ul>
+        </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section id="s6" class="reveal">
+        <div class="section-title"><span class="num">6</span><span>會計師的角色<br>Roles of Accountants</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>在企業中，會計師負責編製和報告會計資訊，主要職責如下。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Accountants are responsible for compiling and reporting accounting information, with major roles as follows.</p>
+
+        <h3>(a) 指示簿記員編製會計記錄</h3>
+        <p>確保簿記程序正確完成，並為簿記員提供記錄會計資訊的指引。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Ensures bookkeeping is done correctly and provides guidance on how to record accounting data.</p>
+
+        <h3>(b) 匯報財務資訊</h3>
+        <p>運用已記錄的資訊編製財務報表，總結企業的財務狀況和表現。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Uses recorded data to prepare financial statements summarising financial position and performance.</p>
+
+        <h3>(c) 提醒管理人員須注意的業務問題</h3>
+        <p>協助不具備足夠會計知識的管理人員正確詮釋財務數據。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Helps managers without sufficient accounting knowledge interpret financial data properly.</p>
+        <div class="example-box">
+            <div class="label">例子 Example</div>
+            <p>及時發現並提醒現金不足以償還貸款的問題，建議籌集資金以避免企業不能還款。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Drawing attention to cash shortages for loan repayment and suggesting raising funds.</p>
+        </div>
+
+        <h3>(d) 向管理人員提供意見</h3>
+        <p>主動參與改善企業營運。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">Actively participates in improving business operations.</p>
+        <div class="example-box">
+            <div class="label">課文案例 Textbook Example</div>
+            <p>會計師發現傳統耳機銷貨收入下跌了百分之五十，而藍芽耳機銷貨收入已佔總耳機收入的百分之七十五以上。行政總裁參考此建議後，決定投放更多資源推廣藍芽耳機，並停止宣傳及售賣舊款傳統耳機。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">The accountant reports traditional earphone revenue dropped by 50%, while Bluetooth earphone revenue contributes over 75%. The CEO considers this information to focus resources on promoting Bluetooth earphones and stop selling traditional ones.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Section 7 -->
+    <section id="s7" class="reveal">
+        <div class="section-title"><span class="num">7</span><span>會計循環的流程<br>Flow of the Accounting Cycle</span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+
+        <p>會計循環是指企業在一個會計期（通常為期一年）內，記錄和處理會計數據的標準程序。企業須在每個會計期重複整個流程的每個步驟。</p>
+        <p class="en-text" style="color:#5d6d7e;font-size:0.9rem;">The accounting cycle refers to the standard procedure for recording and processing accounting data within an accounting period (usually one year). A business must repeat each step of the entire process in every accounting period.</p>
+
+        <div class="cycle-grid">
+            <div class="cycle-card">
+                <div class="step-num">1</div>
+                <h4>記錄在原始分錄簿 Record in Books of Original Entry</h4>
+                <p>企業會保存和核對原始單據（例如發票和收據）的交易詳情，然後把交易記錄在相關的原始分錄簿（又稱日記簿）中。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">A business collects and verifies transaction details with source documents (such as invoices and receipts) first, and then enters the transactions into related books of original entry (also known as day books).</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">2</div>
+                <h4>過帳到分類帳 Post to Ledgers</h4>
+                <p>根據複式記帳法，把原始分錄簿記錄的交易事項過帳到分類帳帳戶中。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">Post transactions recorded in books of original entry to ledger accounts applying the double-entry bookkeeping system.</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">3</div>
+                <h4>結平帳戶並編製試算表 Balance off &amp; Trial Balance</h4>
+                <p>計算各帳戶餘額，定期進行帳戶結平並在試算表上列出餘額，以檢查複式記帳運算是否準確。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">Calculate ledger balances to balance off accounts and list them in a trial balance to check the arithmetical accuracy of double-entry bookkeeping.</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">4</div>
+                <h4>進行期末調整 Period-end Adjustments</h4>
+                <p>在報告期末按應計項目、預付項目及資產價值變動進行期末調整，以反映實際的財務狀況和表現。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">At the end of a period, make adjustments for accruals, prepayments and changes in asset values to reflect the true financial position and performance.</p>
+            </div>
+            <div class="cycle-card">
+                <div class="step-num">5</div>
+                <h4>編製財務報表 Prepare Financial Statements</h4>
+                <p>會計期間完結時，利用調整後的資料編製財務報表（通常包括損益表和財務狀況表），用以匯報企業的財務表現和狀況。</p>
+                <p class="en-text" style="color:#5d6d7e;font-size:0.8rem;">At the end of a period, use adjusted data to prepare financial statements (usually including the income statement and the statement of financial position) to report the financial performance and position.</p>
+            </div>
+        </div>
+
+        <div class="exam-alert">
+            <div class="label">考場防錯警示 Exam Trap Alert</div>
+            <p>試算表平衡不代表帳目百分之百正確。它只能檢查「算術準確度」，無法發現「原則性錯誤」或「完全遺漏記錄」的錯誤。</p>
+            <p>期末調整必須在編製財務報表之前完成。</p>
+            <p class="en-text" style="color:#5d6d7e;font-size:0.85rem;">Trial balance agreement does not mean the accounts are 100% correct. It can only check "arithmetical accuracy", but cannot detect errors of principle or complete omission of transactions. Period-end adjustments must be completed before the preparation of financial statements.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Flashcards -->
+    <section id="flash-section" class="reveal">
+        <div class="section-title"><span class="num">🃏</span><span>重點翻卡 Flashcards<br><span style="font-size:0.85rem;font-weight:400;">點擊卡片翻面自測</span></span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+        <p class="flash-hint">👆 點擊每張卡片翻面查看答案，再點一次翻回來</p>
+        <div class="flash-grid">
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>簿記 vs 會計？</div><div class="flash-en en-text">Bookkeeping vs Accounting?</div></div>
+                <div class="flash-face flash-back"><div>簿記 = 寫日記（記錄）；會計 = 分析日記（整理分析成成績單），範疇更廣</div><div class="flash-en en-text">Bookkeeping = writing a diary (recording); Accounting = analyzing the diary into a "report card", broader in scope</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>R – C – S – C？</div><div class="flash-en en-text">Four functions of accounting?</div></div>
+                <div class="flash-face flash-back"><div>記錄 → 分類 → 歸納 → 溝通（最重要的功能）</div><div class="flash-en en-text">Recording → Classifying → Summarising → Communicating (communicating is the most important)</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>損益表 vs 財務狀況表？</div><div class="flash-en en-text">Income Statement vs Statement of Financial Position?</div></div>
+                <div class="flash-face flash-back"><div>損益表：特定期間的利潤 / 虧損；財務狀況表（舊稱資產負債表）：特定日期的資產、負債、資本</div><div class="flash-en en-text">Income Statement: profit / loss over a period; SFP (formerly balance sheet): assets, liabilities, capital on a given date</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>財務會計 vs 管理會計？</div><div class="flash-en en-text">Financial vs Management Accounting?</div></div>
+                <div class="flash-face flash-back"><div>財務會計 = 給家長的成績單（歷史數據、標準格式、定期、內外使用者）；管理會計 = 作戰秘笈（前瞻、自由格式、只給內部）</div><div class="flash-en en-text">Financial = report card for parents (historical, standardised, regular, internal + external users); Management = battle guide (forward-looking, flexible format, internal only)</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>計劃 vs 控制？</div><div class="flash-en en-text">Planning vs Controlling?</div></div>
+                <div class="flash-face flash-back"><div>計劃：定目標、想方法（期初想考 80 分）；控制：監察進度、檢討成效（期末只得 60 分要跟進）</div><div class="flash-en en-text">Planning: set goals and make plans (aim for 80 marks); Controlling: monitor progress and review results (only got 60, follow up)</div></div>
+            </div></div>
+            <div class="flashcard"><div class="flashcard-inner">
+                <div class="flash-face flash-front"><div>試算表平衡 = 完全正確？</div><div class="flash-en en-text">Trial balance agrees = 100% correct?</div></div>
+                <div class="flash-face flash-back"><div>錯！只能檢查算術準確度，查不出原則性錯誤或完全遺漏。期末調整要在編報表前完成。</div><div class="flash-en en-text">No! It only checks arithmetical accuracy; cannot detect errors of principle or complete omissions. Adjustments come before statements.</div></div>
+            </div></div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz-section" class="reveal">
+        <div class="section-title"><span class="num">📝</span><span>自我測驗 Quiz<br><span style="font-size:0.85rem;font-weight:400;">即時對答案，滿分有驚喜</span></span><span class="collapse-icon">▼</span></div>
+        <div class="section-body">
+        <div id="quiz-box"></div>
+        <div id="quiz-score"></div>
+        <button id="quiz-reset">🔄 重新測驗</button>
+        </div>
+    </section>
+
+</main>
+
+<div id="hl-toolbar">
+    <button data-color="hl-yellow" style="--dot:#ffeb3b" title="黃色螢光 (Alt+1)"></button>
+    <button data-color="hl-green" style="--dot:#a5d6a7" title="綠色螢光 (Alt+2)"></button>
+    <button data-color="hl-pink" style="--dot:#f48fb1" title="粉紅螢光 (Alt+3)"></button>
+    <button data-color="hl-blue" style="--dot:#90caf9" title="藍色螢光 (Alt+4)"></button>
+    <span class="hl-sep"></span>
+    <button id="hl-clear" title="清除全部螢光">⌫</button>
+</div>
+<div id="hl-popup">
+    <button id="hl-remove">✕ 移除螢光</button>
+</div>
+
+<button id="back-top" title="回到頂部">↑</button>
+
+<footer>
+    <p>BAFS Chapter 1: Overview of Accounting Revision Notes — F.4</p>
+    <p>Based on bafs-accounting-ch1-notes-v7.md</p>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ---------- 打字機效果 ---------- */
+    var twEl = document.getElementById('typewriter');
+    var twText = twEl.textContent;
+    twEl.textContent = '';
+    var twIdx = 0;
+    var twTimer = setInterval(function () {
+        twEl.textContent = twText.slice(0, ++twIdx);
+        if (twIdx >= twText.length) clearInterval(twTimer);
+    }, 70);
+
+    /* ---------- Header 漂浮符號 ---------- */
+    var layer = document.getElementById('float-layer');
+    var symbols = ['$', '%', '借', '貸', '資', '債', '+', '=', '¥', 'R', 'C', 'S'];
+    for (var i = 0; i < 22; i++) {
+        var s = document.createElement('span');
+        s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        s.style.left = (Math.random() * 100) + '%';
+        s.style.fontSize = (14 + Math.random() * 26) + 'px';
+        s.style.animationDuration = (6 + Math.random() * 8) + 's';
+        s.style.animationDelay = (Math.random() * 8) + 's';
+        layer.appendChild(s);
+    }
+
+    /* ---------- 閱讀進度條 + 回頂部 ---------- */
+    var bar = document.getElementById('progress');
+    var backTop = document.getElementById('back-top');
+    var navBar = document.querySelector('nav');
+    var lastY = 0;
+    function onScroll() {
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+        if (h.scrollTop > 400) backTop.classList.add('show');
+        else backTop.classList.remove('show');
+        if (h.scrollTop > 200 && h.scrollTop > lastY) navBar.classList.add('nav-hidden');
+        else navBar.classList.remove('nav-hidden');
+        lastY = h.scrollTop;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    backTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ---------- 滾動進場動畫 ---------- */
+    var revealObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                revealObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+        revealObs.observe(el);
+    });
+    // 首屏立即顯示
+    setTimeout(function () {
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight) el.classList.add('visible');
+        });
+    }, 100);
+
+    /* ---------- 導航 scrollspy ---------- */
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+    var spyObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) {
+                navLinks.forEach(function (a) {
+                    a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+                });
+            }
+        });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('main section[id]').forEach(function (sec) {
+        spyObs.observe(sec);
+    });
+
+    /* ---------- 章節收合 ---------- */
+    document.querySelectorAll('.section-title').forEach(function (title) {
+        title.addEventListener('click', function () {
+            title.closest('section').classList.toggle('collapsed');
+        });
+    });
+
+    /* ---------- 深色模式 ---------- */
+    var themeBtn = document.getElementById('theme-btn');
+    themeBtn.addEventListener('click', function () {
+        var root = document.documentElement;
+        var dark = root.getAttribute('data-theme') === 'dark';
+        if (dark) {
+            root.removeAttribute('data-theme');
+            themeBtn.textContent = '🌙 深色';
+        } else {
+            root.setAttribute('data-theme', 'dark');
+            themeBtn.textContent = '☀️ 淺色';
+        }
+    });
+
+    /* ---------- 中英切換 ---------- */
+    var langBtn = document.getElementById('lang-btn');
+    langBtn.addEventListener('click', function () {
+        var hidden = document.body.classList.toggle('hide-en');
+        langBtn.textContent = hidden ? 'EN 顯示英文' : 'EN 隱藏英文';
+    });
+
+    /* ---------- 關鍵字點擊複製 ---------- */
+    document.querySelectorAll('.keywords span').forEach(function (kw) {
+        kw.title = '點擊複製';
+        kw.addEventListener('click', function () {
+            var done = function () {
+                kw.classList.add('copied');
+                var old = kw.textContent;
+                kw.textContent = '✓ 已複製';
+                setTimeout(function () {
+                    kw.textContent = old;
+                    kw.classList.remove('copied');
+                }, 900);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(kw.textContent).then(done).catch(done);
+            } else { done(); }
+        });
+    });
+
+    /* ---------- 翻卡 ---------- */
+    document.querySelectorAll('.flashcard').forEach(function (card) {
+        card.addEventListener('click', function () {
+            card.classList.toggle('flipped');
+        });
+    });
+
+    /* ---------- 測驗 ---------- */
+    var questions = [
+        {
+            q: 'Q1. 會計四種功能的正確順序是？',
+            qEn: 'Q1. What is the correct order of the four accounting functions?',
+            opts: ['記錄 → 歸納 → 分類 → 溝通', '記錄 → 分類 → 歸納 → 溝通', '分類 → 記錄 → 溝通 → 歸納', '溝通 → 歸納 → 分類 → 記錄'],
+            optsEn: ['Recording → Summarising → Classifying → Communicating', 'Recording → Classifying → Summarising → Communicating', 'Classifying → Recording → Communicating → Summarising', 'Communicating → Summarising → Classifying → Recording'],
+            ans: 1,
+            why: '口訣 R–C–S–C：Recording → Classifying → Summarising → Communicating。',
+            whyEn: 'Mnemonic R–C–S–C: Recording → Classifying → Summarising → Communicating.'
+        },
+        {
+            q: 'Q2. 看到「過帳到分類帳」屬於哪一種功能？',
+            qEn: 'Q2. "Posting to the ledgers" belongs to which function?',
+            opts: ['記錄 Recording', '分類 Classifying', '歸納 Summarising', '溝通 Communicating'],
+            optsEn: ['Recording 記錄', 'Classifying 分類', 'Summarising 歸納', 'Communicating 溝通'],
+            ans: 1,
+            why: '「過帳到分類帳」或「按性質分類」= 分類功能。',
+            whyEn: '"Posting to ledgers" or "classifying by nature" = Classifying function.'
+        },
+        {
+            q: 'Q3. 損益表總結的是甚麼？',
+            qEn: 'Q3. What does the income statement summarise?',
+            opts: ['特定日期的資產、負債和資本', '特定期間內的利潤或虧損', '企業的現金流量', '管理人員的前瞻性預測'],
+            optsEn: ['Assets, liabilities and capital on a given date', 'Profit or loss over a period of time', "The business's cash flows", 'Forward-looking forecasts for managers'],
+            ans: 1,
+            why: '損益表（全面收益表）總結特定期間的財務表現；特定日期的資產負債資本是財務狀況表。',
+            whyEn: 'The income statement (statement of comprehensive income) summarises performance over a period; assets, liabilities and capital on a given date is the statement of financial position.'
+        },
+        {
+            q: 'Q4. 試算表平衡代表甚麼？',
+            qEn: 'Q4. What does a balanced trial balance mean?',
+            opts: ['帳目百分之百正確', '只能檢查算術準確度', '沒有原則性錯誤', '所有交易都已記錄'],
+            optsEn: ['The accounts are 100% correct', 'It only checks arithmetical accuracy', 'There are no errors of principle', 'All transactions have been recorded'],
+            ans: 1,
+            why: '試算表平衡只能檢查算術準確度，查不出原則性錯誤或完全遺漏記錄。',
+            whyEn: 'A balanced trial balance only checks arithmetical accuracy; it cannot detect errors of principle or complete omissions.'
+        },
+        {
+            q: 'Q5. 銀行存款帳戶出現貸方餘額表示甚麼？',
+            qEn: 'Q5. What does a credit balance in the bank account mean?',
+            opts: ['企業有大量存款', '銀行透支，屬企業負債', '分類錯誤，必須刪除', '管理會計的前瞻資訊'],
+            optsEn: ['The business has large deposits', 'A bank overdraft, a liability of the business', 'A classification error that must be deleted', 'Forward-looking management accounting information'],
+            ans: 1,
+            why: '貸方餘額表示企業虧欠銀行款項，即銀行透支，視為負債。',
+            whyEn: 'A credit balance means the business owes money to the bank, i.e. a bank overdraft, treated as a liability.'
+        },
+        {
+            q: 'Q6. 下列哪項是管理會計的特徵？',
+            qEn: 'Q6. Which of the following is a feature of management accounting?',
+            opts: ['記錄歷史數據', '只供內部管理人員使用，資訊具前瞻性', '必須符合會計準則的標準格式', '定期每月編製一次'],
+            optsEn: ['It records historical data', 'It is for internal managers only and is forward-looking', 'It must follow standardised accounting standards', 'It is prepared monthly on a regular basis'],
+            ans: 1,
+            why: '管理會計是「作戰秘笈」：只給內部、前瞻性、格式自由、無固定時距。',
+            whyEn: 'Management accounting is the "battle guide": internal only, forward-looking, flexible format, no fixed interval.'
+        }
+    ];
+
+    var quizBox = document.getElementById('quiz-box');
+    var quizScore = document.getElementById('quiz-score');
+    var answered = 0;
+    var correct = 0;
+
+    function buildQuiz() {
+        quizBox.innerHTML = '';
+        quizScore.textContent = '';
+        answered = 0;
+        correct = 0;
+        questions.forEach(function (item, qi) {
+            var div = document.createElement('div');
+            div.className = 'quiz-q';
+            var h = document.createElement('h4');
+            h.innerHTML = '<div>' + item.q + '</div><div class="quiz-en en-text">' + item.qEn + '</div>';
+            div.appendChild(h);
+            var fb = document.createElement('div');
+            fb.className = 'quiz-feedback';
+            item.opts.forEach(function (opt, oi) {
+                var btn = document.createElement('button');
+                btn.className = 'quiz-opt';
+                btn.innerHTML = '<div>' + opt + '</div><div class="quiz-en en-text">' + item.optsEn[oi] + '</div>';
+                btn.addEventListener('click', function () {
+                    if (btn.disabled) return;
+                    var all = div.querySelectorAll('.quiz-opt');
+                    all.forEach(function (b) { b.disabled = true; });
+                    if (oi === item.ans) {
+                        btn.classList.add('correct');
+                        fb.innerHTML = '<div>✓ 答對！' + item.why + '</div><div class="quiz-en en-text">Correct! ' + item.whyEn + '</div>';
+                        fb.style.color = '#27ae60';
+                        correct++;
+                    } else {
+                        btn.classList.add('wrong');
+                        all[item.ans].classList.add('correct');
+                        fb.innerHTML = '<div>✗ 答錯了。' + item.why + '</div><div class="quiz-en en-text">Incorrect. ' + item.whyEn + '</div>';
+                        fb.style.color = '#e74c3c';
+                    }
+                    answered++;
+                    updateScore();
+                });
+                div.appendChild(btn);
+            });
+            div.appendChild(fb);
+            quizBox.appendChild(div);
+        });
+    }
+
+    function updateScore() {
+        quizScore.textContent = '得分：' + correct + ' / ' + questions.length;
+        if (answered === questions.length) {
+            if (correct === questions.length) {
+                quizScore.textContent += ' — 滿分！太厲害了！';
+                confetti();
+            } else if (correct >= 4) {
+                quizScore.textContent += ' — 不錯！再翻翻上面的翻卡吧！';
+            } else {
+                quizScore.textContent += ' — 加油！重溫筆記後再挑戰一次！';
+            }
+        }
+    }
+
+    document.getElementById('quiz-reset').addEventListener('click', buildQuiz);
+    buildQuiz();
+
+    /* ---------- 撒花 ---------- */
+    function confetti() {
+        var colors = ['#e74c3c', '#f39c12', '#27ae60', '#2980b9', '#8e44ad', '#16a085'];
+        for (var i = 0; i < 90; i++) {
+            (function (i) {
+                var c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = (Math.random() * 100) + 'vw';
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                c.style.animationDuration = (2 + Math.random() * 2.5) + 's';
+                c.style.animationDelay = (Math.random() * 0.8) + 's';
+                c.style.width = (6 + Math.random() * 8) + 'px';
+                c.style.height = (8 + Math.random() * 10) + 'px';
+                if (Math.random() > 0.5) c.style.borderRadius = '50%';
+                document.body.appendChild(c);
+                setTimeout(function () { c.remove(); }, 5500);
+            })(i);
+        }
+    }
+})();
+</script>
+
+</body>
+</html>
